@@ -1,3 +1,4 @@
+
 <template>
   <div id="app">
     <header>
@@ -10,21 +11,22 @@
     </header>
     <main>
       <section class="main_buttons">
-        <router-link to="/play" class="glowing-btn">
+        <router-link to="/menu/play" class="glowing-btn">
           <span class="glowing-txt">P<span class="faulty-letter">L</span>AY</span>
         </router-link>
-        <router-link to="/tournament" class="glowing-btn">
+        <router-link to="/menu/tournament" class="glowing-btn">
           <span class="glowing-txt">T<span class="faulty-letter">OU</span>RNAMENT</span>
         </router-link>
-        <router-link to="/leaderboard" class="glowing-btn">
+        <router-link to="/menu/leaderboard" class="glowing-btn">
           <span class="glowing-txt">LEADERB<span class="faulty-letter">OA</span>RD</span>
         </router-link>
-        <router-link to="/profile" class="glowing-btn">
+        <router-link to="/menu/profile" class="glowing-btn">
           <span class="glowing-txt">P<span class="faulty-letter">RO</span>FILE</span>
         </router-link>
-        <router-link to="/settings" class="glowing-btn">
+        <router-link to="/menu/settings" class="glowing-btn">
           <span class="glowing-txt">SETTI<span class="faulty-letter">NG</span>S</span>
         </router-link>
+        <router-view></router-view>
       </section>
     </main>
     <footer>
@@ -41,12 +43,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css?family=Raleway");
-
-:root {
-  --glow-color: hsl(0, 100%, 59%);
-}
 
 * {
   margin: 0;
@@ -79,13 +77,13 @@ footer {
   border-radius: 50%;
   overflow: hidden;
   margin: 10px;
-  -webkit-box-shadow: inset 0px 0px 1.75em 0px var(--glow-color),
-    0px 0px 1.75em 0px var(--glow-color);
-  -moz-box-shadow: inset 0px 0px 1.75em 0px var(--glow-color),
-    0px 0px 1.75em 0px var(--glow-color);
-  box-shadow: inset 0px 0px 1.75em 0px var(--glow-color),
-    0px 0px 1.75em 0px var(--glow-color);
-  border: 0.25em solid var(--glow-color);
+  -webkit-box-shadow: inset 0px 0px 1.75em 0px hsl(0, 100%, 59%),
+    0px 0px 1.75em 0px hsl(0, 100%, 59%);
+  -moz-box-shadow: inset 0px 0px 1.75em 0px hsl(0, 100%, 59%),
+    0px 0px 1.75em 0px hsl(0, 100%, 59%);
+  box-shadow: inset 0px 0px 1.75em 0px hsl(0, 100%, 59%),
+    0px 0px 1.75em 0px hsl(0, 100%, 59%);
+  border: 0.25em solid hsl(0, 100%, 59%);
   perspective: 2em;
 }
 
@@ -104,9 +102,9 @@ footer {
 
 .title {
   flex: 1;
-  color: var(--glow-color);
+  color: hsl(0, 100%, 59%);
   padding: 0.35em 1em;
-  border: 0.15em solid var(--glow-color);
+  border: 0.15em solid hsl(0, 100%, 59%);
   border-radius: 0.45em;
   background: none;
   perspective: 2em;
@@ -115,27 +113,27 @@ footer {
   font-family: "Raleway", sans-serif;
   font-size: 2em;
   font-weight: 900;
-  -webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-    0px 0px 0.5em 0px var(--glow-color);
-  -moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-    0px 0px 0.5em 0px var(--glow-color);
-  box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-    0px 0px 0.5em 0px var(--glow-color);
+  -webkit-box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
+    0px 0px 0.5em 0px hsl(0, 100%, 59%);
+  -moz-box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
+    0px 0px 0.5em 0px hsl(0, 100%, 59%);
+  box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
+    0px 0px 0.5em 0px hsl(0, 100%, 59%);
   -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
-    0 0 0.45em var(--glow-color);
+    0 0 0.45em hsl(0, 100%, 59%);
   -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
-    0 0 0.45em var(--glow-color);
-  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
+    0 0 0.45em hsl(0, 100%, 59%);
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em hsl(0, 100%, 59%);
 }
 
 .glowing-btn {
   position: relative;
-  color: var(--glow-color);
+  color: hsl(0, 100%, 59%);
   cursor: pointer;
   padding: 0.5em 2em;
   width: 450px;
   height: 115px;
-  border: 0.15em solid var(--glow-color);
+  border: 0.15em solid hsl(0, 100%, 59%);
   border-radius: 0.45em;
   background: none;
   perspective: 2em;
@@ -149,12 +147,12 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  -webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-    0px 0px 0.5em 0px var(--glow-color);
-  -moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-    0px 0px 0.5em 0px var(--glow-color);
-  box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-    0px 0px 0.5em 0px var(--glow-color);
+  -webkit-box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
+    0px 0px 0.5em 0px hsl(0, 100%, 59%);
+  -moz-box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
+    0px 0px 0.5em 0px hsl(0, 100%, 59%);
+  box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
+    0px 0px 0.5em 0px hsl(0, 100%, 59%);
   animation: border-flicker 7s linear infinite;
 }
 
@@ -162,10 +160,10 @@ footer {
   float: left;
   margin-right: -0.2em;
   -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
-    0 0 0.45em var(--glow-color);
+    0 0 0.45em hsl(0, 100%, 59%);
   -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
-    0 0 0.45em var(--glow-color);
-  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
+    0 0 0.45em hsl(0, 100%, 59%);
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em hsl(0, 100%, 59%);
   animation: text-flicker 7s linear infinite;
 }
 
@@ -183,8 +181,8 @@ footer {
   bottom: 0;
   opacity: 0;
   z-index: -1;
-  background-color: var(--glow-color);
-  box-shadow: 0 0 2em 0.2em var(--glow-color);
+  background-color: hsl(0, 100%, 59%);
+  box-shadow: 0 0 2em 0.2em hsl(0, 100%, 59%);
   transition: opacity 100ms linear;
 }
 
