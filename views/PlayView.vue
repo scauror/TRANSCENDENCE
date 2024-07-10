@@ -1,24 +1,33 @@
-
 <template>
-    <div class="solid-page">
-      <h1>SOLIDE</h1>
+  <div>
+    <h1>Game Modes</h1>
+    <div class="button-container">
+      <router-link to="/play/solo">
+        <button @click="navigate('/play/solo')">Solo vs IA</button>
+      </router-link>
+      <router-link to="/play/local">
+        <button @click="navigate('/play/local')">Local</button>
+      </router-link>
+      <router-link to="/play/multiplayer">
+        <button @click="navigate('/play/multiplayer')">Multiplayer</button>
+      </router-link>
+      <router-link to="/play/tournament">
+        <button @click="navigate('/play/tournament')">Tournament</button>
+      </router-link>
+      <router-view></router-view>
     </div>
+  </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 
+const navigate = (route) => {
+  const router = useRouter();
+  router.push(route);
+};
 </script>
 
 <style scoped>
-.solid-page {
-  height: 100vh;
-  width: 100%;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 3em;
-  color: black;
-}
-
+/* Styles pour PlayView */
 </style>

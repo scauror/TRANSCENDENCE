@@ -1,10 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import PlayView from '@/views/PlayView.vue'
-import TournamentView from '@/views/TournamentView.vue'
+import MiniGameView from '@/views/MiniGameView.vue'
 import LeaderboardView from '@/views/LeaderboardView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import SettingsView from '@/views/SettingsView.vue'
+
+import SoloView from '@/views/play/SoloView.vue'
+import LocalView from '@/views/play/LocalView.vue'
+import MultiplayerView from '@/views/play/MultiplayerView.vue'
+import TournamentView from '@/views/play/TournamentView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -17,12 +22,18 @@ const router = createRouter({
     {
       path: '/play',
       name: 'PlayView',
-      component: PlayView
+      component: PlayView,
+      children: [
+        {path: 'solo', component: SoloView},
+        {path: 'local', component: LocalView},
+        {path: 'multiplayer', component: MultiplayerView},
+        {path: 'tournament', component: TournamentView}
+      ]
     },
     {
-      path: '/tournament',
-      name: 'TournamentView',
-      component: TournamentView
+      path: '/minigame',
+      name: 'MiniGameView',
+      component: MiniGameView
     },
     {
       path: '/leaderboard',
