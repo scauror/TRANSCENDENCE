@@ -4,10 +4,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'SettingsMenu'
-};
+<script setup>
+
 </script>
 
 <style>

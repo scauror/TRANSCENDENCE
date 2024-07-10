@@ -4,10 +4,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'TournamentMenu'
-};
+<script setup>
+
 </script>
 
 <style>

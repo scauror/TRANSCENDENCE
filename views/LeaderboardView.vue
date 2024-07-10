@@ -4,10 +4,7 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ProfileMenu'
-};
+<script setup>
 </script>
 
 <style>

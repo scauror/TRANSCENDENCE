@@ -4,10 +4,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'LeaderboardMenu'
-};
+<script setup>
+
 </script>
 
 <style>
