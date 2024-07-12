@@ -20,15 +20,29 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/play',
-      name: 'PlayView',
-      component: PlayView,
-      children: [
-        {path: 'solo', component: SoloView},
-        {path: 'local', component: LocalView},
-        {path: 'multiplayer', component: MultiplayerView},
-        {path: 'tournament', component: TournamentView}
-      ]
+      path: '/play', //jai give up les children c'est de la merde en barre et ca complique le taff plus qu'autre chose
+      name: 'PlayView', //apres moultes recherches bcp de gens font comme ca c'est commun donc bon nike sa mere ca fonctionne nickel
+      component: PlayView //Alan si tu passes par la mange mes pieds
+    },
+    {
+      path: '/play/solo',
+      name: 'SoloView',
+      component: SoloView
+    },
+    {
+      path: '/play/local',
+      name: 'LocalView',
+      component: LocalView
+    },
+    {
+      path: '/play/multiplayer',
+      name: 'MultiplayerView',
+      component: MultiplayerView
+    },
+    {
+      path: '/play/tournament',
+      name: 'TournamentView',
+      component: TournamentView
     },
     {
       path: '/minigame',
@@ -52,5 +66,6 @@ const router = createRouter({
     }
   ]
 })
+
 
 export default router
