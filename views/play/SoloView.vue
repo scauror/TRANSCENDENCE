@@ -6,9 +6,7 @@
     <main>
       <canvas ref="canvas"></canvas>
     </main>
-    <footer>
-      <p>Footer ici</p>
-    </footer>
+
   </div>
 </template>
 
@@ -40,7 +38,7 @@ onMounted(() => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
   cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
 
