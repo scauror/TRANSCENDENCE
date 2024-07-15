@@ -25,6 +25,4 @@
 
 <style scoped>
 
-@import '../styles/style.css';
-
 </style>

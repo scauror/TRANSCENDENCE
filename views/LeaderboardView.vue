@@ -54,9 +54,6 @@ export default {
 
 <style scoped>
 
-@import '../styles/style.css';
-
-
 .leaderboard {
   max-width: 600px;
   margin: auto;
