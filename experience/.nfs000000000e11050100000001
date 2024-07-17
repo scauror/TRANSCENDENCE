@@ -1,0 +1,48 @@
+export class GameUtils {
+    constructor() {
+        this.gamePaused = false
+    }
+
+    pauseGame(animationId) {
+        if (!this.gamePaused) {
+            cancelAnimationFrame(animationId);
+            this.gamePaused = true;
+        }
+        return this.gamePaused;
+    }
+        
+    resumeGame(animate) {
+        if (this.gamePaused) {
+            this.gamePaused = false;
+            animate();
+        }
+        return this.gamePaused;
+    }
+
+    isGamePaused() {
+        return (this.gamePaused)
+    }
+
+    resetBall(sphere, ballSpeed) {
+        sphere.position.set(0, 0, 0);
+        //ici fonction pour decompte de 3 2 1... avant le debut d'une nouvelle manche
+        ballSpeed.x = -ballSpeed.x;
+    }
+
+    handlePaddleCollision(paddle, ballSpeed, sphere, cube1, MAX_ANGLE) {
+        ballSpeed.x = -ballSpeed.x;
+        
+        let offset = (sphere.position.z - paddle.position.z) / 2.5;
+        let angle = offset * MAX_ANGLE * (Math.PI / 180);
+        let speedMagnitude = Math.sqrt(ballSpeed.x * ballSpeed.x + ballSpeed.z * ballSpeed.z);
+        
+        ballSpeed.z = speedMagnitude * Math.sin(angle);
+        ballSpeed.x = Math.sign(ballSpeed.x) * speedMagnitude * Math.cos(angle);
+        
+        if (paddle === cube1) {
+            sphere.position.x = paddle.position.x + 0.4 + 0.7;
+        } else {
+            sphere.position.x = paddle.position.x - 0.4 - 0.7;
+        }
+    }
+}

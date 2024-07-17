@@ -1,14 +1,15 @@
 <template>
-    <div>
-      <h1>Tournament</h1>
-      <p>Contenu de Tournament...</p>
-    </div>
+    <div class="numero_counting_wrapper">
+        <div class="numero_shape"></div>
+      </div>
   </template>
   
   <script setup>
   </script>
   
 <style scoped>
+
+/* @import '../../styles/countdown.css'; */
 
 </style>
   
