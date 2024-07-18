@@ -7,9 +7,7 @@
   <script setup>
   </script>
   
-<style scoped>
-
-/* @import '../../styles/countdown.css'; */
+<style>
 
 </style>
   

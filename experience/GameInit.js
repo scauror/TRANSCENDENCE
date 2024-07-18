@@ -1,35 +1,28 @@
 
 import * as THREE from 'three';
-
-import { KEYBOARD } from './KeyboardManager'
+import { KEYBOARD } from './KeyboardManager';
 
 const VELOCITY = 0.25;
 const MAX_ANGLE = 45;
 
 export class Game {
-
-/////////////////////////////////////////////////////////////////////
-////////// Permet de mettre en place la vue 3d ainsi que les elements 3d a l'interieur
-////////// Manque plus qu'a variabliliser les parametres pour pouvoir rendre la chose amovible
-
-    constructor() {
-
-        this.scene = new THREE.Scene()
+    constructor(numeroShapeRef) {
+        this.score1 = 0;
+        this.score2 = 0;
+        
+        this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         
         const geometry = new THREE.BoxGeometry(0.8, 0.5, 5);
-        const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const material = new THREE.MeshBasicMaterial({ color: 0xff4646 });
         
         this.cube1 = new THREE.Mesh(geometry, material);
         this.cube1.position.x = -25;
         this.cube2 = new THREE.Mesh(geometry, material);
         this.cube2.position.x = 25;
         
-        // const sphGeometry = new THREE.SphereGeometry(0.7, 30, 15);
-        // const sphMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-        
         this.ballSpeed = { x: 0.2, z: 0.2 };
-        this.sphere = new THREE.Mesh(new THREE.SphereGeometry(0.7, 30, 15), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
+        this.sphere = new THREE.Mesh(new THREE.SphereGeometry(0.7, 30, 15), new THREE.MeshBasicMaterial({ color: 0xff4646 }));
         this.sphere.position.x = 0;
 
         this.scene.add(this.cube1);
@@ -40,10 +33,10 @@ export class Game {
         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         this.paused = false;
+        this.numeroShapeRef = numeroShapeRef;
     
         window.addEventListener('keydown', (event) => {
-            if (event.key === ' ')
-            {
+            if (event.key === ' ') {
                 if (this.isGamePaused())
                     this.resumeGame();
                 else
@@ -53,15 +46,13 @@ export class Game {
     }
 
     moveLeftPaddle(offset) {
-        if (offset >= 0 && this.cube2.position.z > -12.7
-            || offset < 0 && this.cube2.position.z < 10) {
+        if (offset >= 0 && this.cube2.position.z > -12.7 || offset < 0 && this.cube2.position.z < 10) {
             this.cube2.position.z -= offset;
         }
     }
 
     moveRightPaddle(offset) {
-        if (offset >= 0 && this.cube1.position.z > -12.7
-            || offset < 0 && this.cube1.position.z < 10) {
+        if (offset >= 0 && this.cube1.position.z > -12.7 || offset < 0 && this.cube1.position.z < 10) {
             this.cube1.position.z -= offset;
         }
     }
@@ -79,17 +70,18 @@ export class Game {
     }
 
     isGamePaused() {
-        return (this.paused)
+        return this.paused;
     }
 
     resetBall() {
         this.sphere.position.set(0, 0, 0);
-        //ici fonction pour decompte de 3 2 1... avant le debut d'une nouvelle manche
+        this.cube1.position.set(this.cube1.position.x, 0, 0);
+        this.cube2.position.set(this.cube2.position.x, 0, 0);
+        this.countdown();
         this.ballSpeed.x = -this.ballSpeed.x;
     }
 
-    _compute_x_offset(paddle)
-    {
+    _compute_x_offset(paddle) {
         const PADLE_W = paddle.geometry.parameters.width;
         const PADLE_H = paddle.geometry.parameters.height;
         let angle = 0;
@@ -105,8 +97,7 @@ export class Game {
         return ((paddle.position.x + PADLE_W / 2.) - (this.sphere.position.x + RADIUS));
     }
 
-    handlePaddleCollision(paddle)
-    {
+    handlePaddleCollision(paddle) {
         const ZOFFSET = (this.sphere.position.z - paddle.position.z) / 2.5;
         const angle = ZOFFSET * MAX_ANGLE * (Math.PI / 180.);
         const speedMagnitude = Math.sqrt(this.ballSpeed.x * this.ballSpeed.x + this.ballSpeed.z * this.ballSpeed.z);
@@ -118,13 +109,10 @@ export class Game {
         this.ballSpeed.z = speedMagnitude * Math.sin(angle);
         this.ballSpeed.x = speedMagnitude * Math.cos(angle);
 
-        if (paddle === this.cube1)
-        {
+        if (paddle === this.cube1) {
             this.ballSpeed.x = 1 * this.ballSpeed.x;
             this.sphere.position.x += XOFFSET;
-        }
-        else
-        {
+        } else {
             this.ballSpeed.x = -1 * this.ballSpeed.x;
             this.sphere.position.x -= XOFFSET;
         }
@@ -132,22 +120,41 @@ export class Game {
 
     countdown() {
         this.pauseGame();
+        
+        if (this.numeroShapeRef.value) {
+            this.numeroShapeRef.value.style.display = 'block';
+            this.numeroShapeRef.value.classList.add('score-animation');
+            
+            setTimeout(() => {
+                this.numeroShapeRef.value.style.display = 'none';
+                this.resumeGame();
+            }, 3000);
+        } else {
+            this.resumeGame();
+        }
+    }
 
-        this.resumeGame();
+    getScore1() {
+        return this.score1;
+    }
+
+    getScore2() {
+        return this.score2;
     }
 
     update() {
+
         if (KEYBOARD.isKeyDown('ArrowUp')) {
-            this.moveLeftPaddle(+VELOCITY)
+            this.moveLeftPaddle(+VELOCITY);
         }
         if (KEYBOARD.isKeyDown('ArrowDown')) {
-            this.moveLeftPaddle(-VELOCITY)
+            this.moveLeftPaddle(-VELOCITY);
         }
         if (KEYBOARD.isKeyDown('w')) {
-            this.moveRightPaddle(+VELOCITY)
+            this.moveRightPaddle(+VELOCITY);
         }
         if (KEYBOARD.isKeyDown('s')) {
-            this.moveRightPaddle(-VELOCITY)
+            this.moveRightPaddle(-VELOCITY);
         }
 
         this.sphere.position.x += this.ballSpeed.x;
@@ -162,16 +169,13 @@ export class Game {
         }
     
         if (this.sphere.position.x <= -25) { // ici a la place de 25 faut verif avec la position de la paddle
-            //si la balle est derriere faut lancer le reset genre
-            // ici fonction pour que joueur 2 marque un point
             this.resetBall();
-            this.countdown();
+            this.score2++;
         }
     
         if (this.sphere.position.x >= 25) { //pareil qu'au dessus genre
-        // ici fonction pour que joueur 1 marque un point
             this.resetBall();
-            this.countdown();
+            this.score1++;
         }
     }
 
