@@ -3,20 +3,15 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile.dev
-    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
-    expose:
-      - 8000
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 8000:8000
     env_file:
       - ./.env.dev
     depends_on:
       - database
-
-  nginx:
-    build: ./nginx
-    ports:
-      - 1337:80
-    depends_on:
-      - web
 
   database:
     image: postgres:15
@@ -24,8 +19,6 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.db.env.dev
-    expose:
-      - 5432
 
 volumes:
   postgres_data:

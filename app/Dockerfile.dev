@@ -1,51 +1,20 @@
-# Builder
-FROM	python:3.11.4-slim-buster AS builder
+FROM	python:3.11.4-slim-buster
 
 WORKDIR	/usr/src/app
 
 ENV		PYTHONDONTWRITEBYTECODE 1
 ENV		PYTHONUNBUFFERED 1
 
-RUN		apt-get update &&								\
-		apt-get install -y --no-install-recommends gcc
+RUN		apt-get update &&	\
+		apt-get install -y netcat
 
 RUN		pip install --upgrade pip
-COPY	. /usr/src/app/
-
 COPY	./requirements.txt .
-RUN		pip wheel							\
-			--no-cache-dir					\
-			--no-deps						\
-			--wheel-dir /usr/src/app/wheels	\
-			-r requirements.txt
-
-# Final
-FROM	python:3.11.4-slim-buster
-
-RUN		mkdir -p /home/app
-
-RUN		addgroup --system app &&		\
-		adduser --system --group app
-
-ENV		HOME=/home/app
-ENV		APP_HOME=/home/app/web
-RUN		mkdir $APP_HOME
-WORKDIR	$APP_HOME
-
-RUN		apt-get update &&									\
-		apt-get install -y --no-install-recommends netcat
-COPY	--from=builder /usr/src/app/wheels /wheels
-COPY	--from=builder /usr/src/app/requirements.txt .
-RUN		pip install --upgrade pip
-RUN		pip install --no-cache /wheels/*
+RUN		pip install -r requirements.txt
 
 COPY	./entrypoint.dev.sh .
-RUN		chmod +x  $APP_HOME/entrypoint.dev.sh
+RUN		chmod +x /usr/src/app/entrypoint.dev.sh
 
-COPY	. $APP_HOME
+COPY	. .
 
-RUN		chown -R app:app $APP_HOME
-
-USER app
-
-ENTRYPOINT [ "/home/app/web/entrypoint.dev.sh" ]
+ENTRYPOINT	[ "/usr/src/app/entrypoint.dev.sh" ]
