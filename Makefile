@@ -1,10 +1,12 @@
+COMPOSE_FILE	:=	docker-compose.prod.yml
+
 all: run
 
 run: build
-	@docker-compose up -d
+	@docker-compose -f $(COMPOSE_FILE) up -d
 
 build:
-	@docker-compose build
+	@docker-compose -f $(COMPOSE_FILE) build
 
 down:
-	@docker-compose down -v
+	@docker-compose -f $(COMPOSE_FILE) down -v
