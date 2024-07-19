@@ -1,10 +1,10 @@
 all: run
 
 run: build
-	@sudo docker-compose up -d
+	@docker-compose up -d
 
 build:
-	@sudo docker-compose build
+	@docker-compose build
 
 down:
-	@sudo docker-compose down -v
+	@docker-compose down -v
