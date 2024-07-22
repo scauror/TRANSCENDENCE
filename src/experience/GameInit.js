@@ -5,93 +5,23 @@ import { KEYBOARD } from './KeyboardManager';
 const VELOCITY = 0.25;
 const MAX_ANGLE = 45;
 
-// export class Game {
-//     constructor(numeroShapeRef) {
-//         this.score1 = 0;
-//         this.score2 = 0;
-        
-//         this.scene = new THREE.Scene();
-//         // this.scene.background = new THREE.Color(0x87CEEB);
-//         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-//         //texture de la sphere
-//         this.sphTexture = new THREE.TextureLoader().load(require('./texture/cyberSphere.png'));
-//         this.sphTexture.minFilter = THREE.LinearFilter;
-
-//         //texture des paddles
-//         this.padTexture = new THREE.TextureLoader().load(require('./texture/cyberPaddle.png'));
-//         this.padTexture.minFilter = THREE.LinearFilter;
-        
-//         const geometry = new THREE.BoxGeometry(0.8, 0.5, 5);
-//         const material = new THREE.MeshBasicMaterial({ map: this.padTexture });
-        
-//         this.cube1 = new THREE.Mesh(geometry, material);
-//         this.cube1.position.x = -25;
-//         this.cube2 = new THREE.Mesh(geometry, material);
-//         this.cube2.position.x = 25;
-        
-//         this.ballSpeed = { x: 0.2, z: 0.2 };
-
-//         const sphGeometry = new THREE.SphereGeometry(0.7, 30, 30);
-//         const sphMaterial = new THREE.MeshPhongMaterial({
-//             map: this.sphTexture,
-//             // specular: new THREE.Color(0x111111),
-//             // emissive: new THREE.Color(0x990000),
-//         });
-//         this.sphere = new THREE.Mesh(sphGeometry, sphMaterial);
-//         this.sphere.position.x = 0;
-
-//         this.ambientLight = new THREE.AmbientLight(0xffffff);
-
-//         this.pointLight = new THREE.PointLight(0xffffff, 1, 100); // Lumière ponctuelle
-//         this.pointLight.position.set(0, 20, 0);
-
-//         this.scene.add(this.pointLight);
-//         this.scene.add(this.ambientLight);
-//         this.scene.add(this.cube1);
-//         this.scene.add(this.cube2);
-//         this.scene.add(this.sphere);
-
-//         this.camera.position.set(0, 20, 0);
-//         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-//         this.paused = false;
-//         this.numeroShapeRef = numeroShapeRef;
-    
-//         window.addEventListener('keydown', (event) => {
-//             if (event.key === ' ') {
-//                 if (this.isGamePaused())
-//                     this.resumeGame();
-//                 else
-//                     this.pauseGame();
-//             }
-//         });
-//     }
 export class Game {
     constructor(numeroShapeRef) {
-        this.score1 = 0;
-        this.score2 = 0;
-        
-        this.scene = new THREE.Scene();
-        // this.scene.background = new THREE.Color(0x87CEEB);
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		this.score1 = 0;
+		this.score2 = 0;
 
-        // Charger les textures
-        this.sphTexture = new THREE.TextureLoader().load(require('./texture/cyberSphere.png'));
-        this.sphTexture.minFilter = THREE.LinearFilter;
+		this.scene = new THREE.Scene();
+		this.scene.background = new THREE.Color(0xffdddd);
+		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-        this.padTexture = new THREE.TextureLoader().load(require('./texture/cyberPaddle.png'));
-        this.padTexture.minFilter = THREE.LinearFilter;
-        
-        // Créer les géométries et matériaux
-        const geometry = new THREE.BoxGeometry(0.8, 0.5, 5);
-        const material = new THREE.MeshPhongMaterial({ map: this.padTexture });
-        
-        this.cube1 = new THREE.Mesh(geometry, material);
-        this.cube1.position.x = -25;
-        this.cube2 = new THREE.Mesh(geometry, material);
-        this.cube2.position.x = 25;
-        
+		const geometry = new THREE.BoxGeometry(0.8, 0.5, 5);
+		const material = new THREE.MeshPhongMaterial({ map: this.padTexture });
+
+		this.cube1 = new THREE.Mesh(geometry, material);
+		this.cube1.position.x = -25;
+		this.cube2 = new THREE.Mesh(geometry, material);
+		this.cube2.position.x = 25;
+         
         this.ballSpeed = { x: 0.2, z: 0.2 };
 
         const sphGeometry = new THREE.SphereGeometry(0.7, 30, 30);
