@@ -18,7 +18,7 @@
       <div class="numero_counting_wrapper">
         <div ref="numeroShape" class="numero_shape"></div>
       </div>
-      <div ref="canvasContainer"></div>
+      <div class="troad" ref="canvasContainer"></div>
     </main>
   </div>
 </template>
@@ -72,6 +72,10 @@ function animate() {
     font-style: normal;
 }
 
+main {
+  border: 2px solid red
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -88,6 +92,9 @@ header {
   padding: 10px;
 }
 
+.troad {
+  border: 2px solid red
+}
 
 .commands {
   font-size: 0.5em;
