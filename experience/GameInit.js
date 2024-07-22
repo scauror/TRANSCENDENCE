@@ -12,6 +12,9 @@ export class Game {
         
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        this.textureLoader = new THREE.TextureLoader();
+        this.texture = this.textureLoader.load('../imgs/cyberTexture.jpeg');
         
         const geometry = new THREE.BoxGeometry(0.8, 0.5, 5);
         const material = new THREE.MeshBasicMaterial({ color: 0xff4646 });
@@ -22,7 +25,7 @@ export class Game {
         this.cube2.position.x = 25;
         
         this.ballSpeed = { x: 0.2, z: 0.2 };
-        this.sphere = new THREE.Mesh(new THREE.SphereGeometry(0.7, 30, 15), new THREE.MeshBasicMaterial({ color: 0xff4646 }));
+        this.sphere = new THREE.Mesh(new THREE.SphereGeometry(0.7, 30, 15), new THREE.MeshBasicMaterial({ map: this.texture }));
         this.sphere.position.x = 0;
 
         this.scene.add(this.cube1);
