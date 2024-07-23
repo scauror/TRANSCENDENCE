@@ -24,6 +24,8 @@ services:
       - media_volume:/home/app/web/mediafiles
     expose:
       - 8080
+    depends_on:
+      - backend
 
   nginx:
     build: ./nginx
@@ -32,6 +34,7 @@ services:
       - media_volume:/home/app/web/mediafiles
     ports:
       - 1337:80
+      - 1338:81
     depends_on:
       - backend
       - frontend
