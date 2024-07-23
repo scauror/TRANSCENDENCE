@@ -20,6 +20,7 @@ services:
     command: npm run serve
     volumes:
       - ./frontend:/app/frontend
+      - node_modules:/app/frontend/node_modules
     expose:
       - 8080
     env_file:
@@ -45,3 +46,4 @@ services:
 
 volumes:
   postgres_data:
+  node_modules:
