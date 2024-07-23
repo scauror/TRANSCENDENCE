@@ -1,72 +1,11 @@
 
 import * as THREE from 'three';
 import { KEYBOARD } from './KeyboardManager';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 const VELOCITY = 0.25;
 const MAX_ANGLE = 45;
 
-// export class Game {
-//     constructor(numeroShapeRef) {
-//         this.score1 = 0;
-//         this.score2 = 0;
-        
-//         this.scene = new THREE.Scene();
-//         // this.scene.background = new THREE.Color(0x87CEEB);
-//         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-//         //texture de la sphere
-//         this.sphTexture = new THREE.TextureLoader().load(require('./texture/cyberSphere.png'));
-//         this.sphTexture.minFilter = THREE.LinearFilter;
-
-//         //texture des paddles
-//         this.padTexture = new THREE.TextureLoader().load(require('./texture/cyberPaddle.png'));
-//         this.padTexture.minFilter = THREE.LinearFilter;
-        
-//         const geometry = new THREE.BoxGeometry(0.8, 0.5, 5);
-//         const material = new THREE.MeshBasicMaterial({ map: this.padTexture });
-        
-//         this.cube1 = new THREE.Mesh(geometry, material);
-//         this.cube1.position.x = -25;
-//         this.cube2 = new THREE.Mesh(geometry, material);
-//         this.cube2.position.x = 25;
-        
-//         this.ballSpeed = { x: 0.2, z: 0.2 };
-
-//         const sphGeometry = new THREE.SphereGeometry(0.7, 30, 30);
-//         const sphMaterial = new THREE.MeshPhongMaterial({
-//             map: this.sphTexture,
-//             // specular: new THREE.Color(0x111111),
-//             // emissive: new THREE.Color(0x990000),
-//         });
-//         this.sphere = new THREE.Mesh(sphGeometry, sphMaterial);
-//         this.sphere.position.x = 0;
-
-//         this.ambientLight = new THREE.AmbientLight(0xffffff);
-
-//         this.pointLight = new THREE.PointLight(0xffffff, 1, 100); // Lumière ponctuelle
-//         this.pointLight.position.set(0, 20, 0);
-
-//         this.scene.add(this.pointLight);
-//         this.scene.add(this.ambientLight);
-//         this.scene.add(this.cube1);
-//         this.scene.add(this.cube2);
-//         this.scene.add(this.sphere);
-
-//         this.camera.position.set(0, 20, 0);
-//         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-//         this.paused = false;
-//         this.numeroShapeRef = numeroShapeRef;
-    
-//         window.addEventListener('keydown', (event) => {
-//             if (event.key === ' ') {
-//                 if (this.isGamePaused())
-//                     this.resumeGame();
-//                 else
-//                     this.pauseGame();
-//             }
-//         });
-//     }
 export class Game {
     constructor(numeroShapeRef) {
         this.score1 = 0;
@@ -76,14 +15,19 @@ export class Game {
         // this.scene.background = new THREE.Color(0x87CEEB);
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-        // Charger les textures
         this.sphTexture = new THREE.TextureLoader().load(require('./texture/cyberSphere.png'));
         this.sphTexture.minFilter = THREE.LinearFilter;
 
         this.padTexture = new THREE.TextureLoader().load(require('./texture/cyberPaddle.png'));
         this.padTexture.minFilter = THREE.LinearFilter;
         
-        // Créer les géométries et matériaux
+        this.mapScene = new GLTFLoader();
+        this.mapScene.load('./3DMap/TronscendenceLandscape.glb', (gltf) => {
+            this.scene.add(gltf.scene);
+        }, undefined, (error) => {
+            console.error('An error happened while loading the GLTF model:', error);
+        });
+
         const geometry = new THREE.BoxGeometry(0.8, 0.5, 5);
         const material = new THREE.MeshPhongMaterial({ map: this.padTexture });
         
@@ -97,16 +41,16 @@ export class Game {
         const sphGeometry = new THREE.SphereGeometry(0.7, 30, 30);
         const sphMaterial = new THREE.MeshPhongMaterial({
             map: this.sphTexture,
-            shininess: 100, // Contrôle de la brillance
-            specular: new THREE.Color(0xffffff), // Couleur des reflets spéculaires
+            shininess: 100,
+            specular: new THREE.Color(0xffffff),
         });
         this.sphere = new THREE.Mesh(sphGeometry, sphMaterial);
         this.sphere.position.x = 0;
 
         // Ajouter les lumières
-        this.ambientLight = new THREE.AmbientLight(0xf0f0f0); // Lumière ambiante douce
-        this.directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Lumière directionnelle
-        this.directionalLight.position.set(5, 10, 5).normalize(); // Positionner et normaliser la direction de la lumière
+        this.ambientLight = new THREE.AmbientLight(0xf0f0f0);
+        this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        this.directionalLight.position.set(5, 10, 5).normalize();
 
         this.scene.add(this.ambientLight);
         this.scene.add(this.directionalLight);
@@ -114,7 +58,7 @@ export class Game {
         this.scene.add(this.cube2);
         this.scene.add(this.sphere);
 
-        this.camera.position.set(0, 20, 0); // Ajuster la position de la caméra pour mieux voir la sphère
+        this.camera.position.set(0, 20, 0);
         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         this.paused = false;
