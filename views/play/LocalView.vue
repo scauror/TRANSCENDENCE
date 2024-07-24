@@ -26,7 +26,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import * as THREE from 'three';
-import { Game } from '../../experience/GameInit';
+import { Game } from '../../experience/GameInit2d';
 
 const canvasContainer = ref(null);
 const numeroShape = ref(null);
@@ -47,7 +47,7 @@ onMounted(() => {
   canvasContainer.value.appendChild(renderer.domElement);
 
   game = new Game(numeroShape);
-  game.countdown();
+  // game.countdown();
   animate();
 });
 
@@ -103,8 +103,8 @@ header {
 .numero_counting_wrapper {
   background-color: #000000;
   margin: 0 auto;
-  width: 200px;
-  height: 200px;
+  width: 50px;
+  height: 50px;
 }
 
 .numero_shape {

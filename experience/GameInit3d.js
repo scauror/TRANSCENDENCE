@@ -2,9 +2,12 @@
 import * as THREE from 'three';
 import { KEYBOARD } from './KeyboardManager';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
-const VELOCITY = 0.25;
+const VELOCITY = 0.4;
 const MAX_ANGLE = 45;
+
+/////////////////////////////////////init du pong en 3d vue fps en mode 3e personne un peu
 
 export class Game {
     constructor(numeroShapeRef) {
@@ -12,40 +15,47 @@ export class Game {
         this.score2 = 0;
         
         this.scene = new THREE.Scene();
-        // this.scene.background = new THREE.Color(0x87CEEB);
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(75, (window.innerWidth / window.innerHeight), 0.1, 1000);
 
         this.sphTexture = new THREE.TextureLoader().load(require('./texture/cyberSphere.png'));
         this.sphTexture.minFilter = THREE.LinearFilter;
 
         this.padTexture = new THREE.TextureLoader().load(require('./texture/cyberPaddle.png'));
         this.padTexture.minFilter = THREE.LinearFilter;
-        
+
+
+        const dracoLoader = new DRACOLoader();
         this.mapScene = new GLTFLoader();
-        this.mapScene.load('./3DMap/TronscendenceLandscape.glb', (gltf) => {
+        this.mapScene.setDRACOLoader(dracoLoader);
+        this.mapScene.load('/map_scene/tronStadium.glb', (gltf) => {
+            
             this.scene.add(gltf.scene);
+            gltf.scene.scale.set(20, 20, 20); 
+
         }, undefined, (error) => {
             console.error('An error happened while loading the GLTF model:', error);
         });
 
-        const geometry = new THREE.BoxGeometry(0.8, 0.5, 5);
-        const material = new THREE.MeshPhongMaterial({ map: this.padTexture });
+        const geometry = new THREE.BoxGeometry(0.8, 0.5, 5); 
+        const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });//({ map: this.padTexture });
         
         this.cube1 = new THREE.Mesh(geometry, material);
-        this.cube1.position.x = -25;
         this.cube2 = new THREE.Mesh(geometry, material);
-        this.cube2.position.x = 25;
-        
-        this.ballSpeed = { x: 0.2, z: 0.2 };
+        this.cube1.position.x = -25; 
+        this.cube2.position.x = 25; 
+        this.cube1.position.y = -10; 
+        this.cube2.position.y = -10;
 
-        const sphGeometry = new THREE.SphereGeometry(0.7, 30, 30);
+        this.ballSpeed = { x: 0.4, z: 0.4 };
+
+        const sphGeometry = new THREE.SphereGeometry(0.7, 30, 30); 
         const sphMaterial = new THREE.MeshPhongMaterial({
             map: this.sphTexture,
             shininess: 100,
             specular: new THREE.Color(0xffffff),
         });
         this.sphere = new THREE.Mesh(sphGeometry, sphMaterial);
-        this.sphere.position.x = 0;
+        this.sphere.position.set(0, -10, 0);
 
         // Ajouter les lumières
         this.ambientLight = new THREE.AmbientLight(0xf0f0f0);
@@ -58,8 +68,8 @@ export class Game {
         this.scene.add(this.cube2);
         this.scene.add(this.sphere);
 
-        this.camera.position.set(0, 20, 0);
-        this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+        this.camera.position.set(60, 5, 0); 
+        this.camera.lookAt(new THREE.Vector3(0, -15, 0));
 
         this.paused = false;
         this.numeroShapeRef = numeroShapeRef;
@@ -102,9 +112,9 @@ export class Game {
     }
 
     resetBall() {
-        this.sphere.position.set(0, 0, 0);
-        this.cube1.position.set(this.cube1.position.x, 0, 0);
-        this.cube2.position.set(this.cube2.position.x, 0, 0);
+        this.sphere.position.set(0, -10, 0);
+        this.cube1.position.set(this.cube1.position.x, -10, 0);
+        this.cube2.position.set(this.cube2.position.x, -10, 0);
         this.countdown();
         this.ballSpeed.x = -this.ballSpeed.x;
     }
@@ -172,10 +182,10 @@ export class Game {
 
     update() {
 
-        if (KEYBOARD.isKeyDown('ArrowUp')) {
+        if (KEYBOARD.isKeyDown('ArrowRight')) {
             this.moveLeftPaddle(+VELOCITY);
         }
-        if (KEYBOARD.isKeyDown('ArrowDown')) {
+        if (KEYBOARD.isKeyDown('ArrowLeft')) {
             this.moveLeftPaddle(-VELOCITY);
         }
         if (KEYBOARD.isKeyDown('w')) {
