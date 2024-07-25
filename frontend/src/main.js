@@ -4,5 +4,5 @@ import router from './router';
 import './styles/style.css';
 
 createApp(App)
-  .use(router)
-  .mount('#app');
+	.use(router)
+	.mount('#app');
