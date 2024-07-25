@@ -19,7 +19,6 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
-    command: npm run serve
     volumes:
       - static_volume:/home/app/web/staticfiles
       - www:/var/www/transcendance
