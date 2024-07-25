@@ -1,11 +1,11 @@
 services:
   backend:
     build:
-      context: ./app
+      context: ./backend
       dockerfile: Dockerfile.dev
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./app/:/usr/src/app/
+      - ./backend/:/usr/src/app/
     expose:
       - 8000
     env_file:
