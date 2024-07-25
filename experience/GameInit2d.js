@@ -37,24 +37,24 @@ export class Game {
             console.error('An error happened while loading the GLTF model:', error);
         });
 
-        const geometry = new THREE.BoxGeometry(0.8, 0.5, 5); 
+        const geometry = new THREE.BoxGeometry(1.6, 1, 7);
         const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });//({ map: this.padTexture });
         
         this.cube1 = new THREE.Mesh(geometry, material);
-        this.cube1.position.x = -25; 
         this.cube2 = new THREE.Mesh(geometry, material);
-        this.cube2.position.x = 25; 
+        this.cube1.position.set(-35, -19, 0);
+        this.cube2.position.set(35, -19, 0);
         
-        this.ballSpeed = { x: 0.4, z: 0.4 };
+        this.ballSpeed = { x: 0.5, z: 0.5 };
 
-        const sphGeometry = new THREE.SphereGeometry(0.7, 30, 30); 
+        const sphGeometry = new THREE.SphereGeometry(1, 30, 30); 
         const sphMaterial = new THREE.MeshPhongMaterial({
             map: this.sphTexture,
             shininess: 100,
             specular: new THREE.Color(0xffffff),
         });
         this.sphere = new THREE.Mesh(sphGeometry, sphMaterial);
-        this.sphere.position.x = 0;
+        this.sphere.position.set(0, -19, 0);
 
         // Ajouter les lumières
         this.ambientLight = new THREE.AmbientLight(0xf0f0f0);
@@ -84,13 +84,13 @@ export class Game {
     }
 
     moveLeftPaddle(offset) {
-        if (offset >= 0 && this.cube2.position.z > -12.7 || offset < 0 && this.cube2.position.z < 10) {
+        if (offset >= 0 && this.cube2.position.z > -14.8 || offset < 0 && this.cube2.position.z < 14.8) {
             this.cube2.position.z -= offset;
         }
     }
 
     moveRightPaddle(offset) {
-        if (offset >= 0 && this.cube1.position.z > -12.7 || offset < 0 && this.cube1.position.z < 10) {
+        if (offset >= 0 && this.cube1.position.z > -14.8 || offset < 0 && this.cube1.position.z < 14.8) {
             this.cube1.position.z -= offset;
         }
     }
@@ -112,9 +112,9 @@ export class Game {
     }
 
     resetBall() {
-        this.sphere.position.set(0, 0, 0);
-        this.cube1.position.set(this.cube1.position.x, 0, 0);
-        this.cube2.position.set(this.cube2.position.x, 0, 0);
+        this.sphere.position.set(0, this.sphere.position.y, 0);
+        this.cube1.position.set(this.cube1.position.x, this.cube1.position.y, 0);
+        this.cube2.position.set(this.cube2.position.x, this.cube1.position.y, 0);
         this.countdown();
         this.ballSpeed.x = -this.ballSpeed.x;
     }
@@ -202,16 +202,16 @@ export class Game {
         this.handlePaddleCollision(this.cube2);
 
         // Collision avec les murs
-        if (this.sphere.position.z <= -14.5 || this.sphere.position.z >= 13) {
+        if (this.sphere.position.z <= -18 || this.sphere.position.z >= 18) {
             this.ballSpeed.z = -this.ballSpeed.z;
         }
     
-        if (this.sphere.position.x <= -25) { // ici a la place de 25 faut verif avec la position de la paddle
+        if (this.sphere.position.x <= -36) {
             this.resetBall();
             this.score2++;
         }
     
-        if (this.sphere.position.x >= 25) { //pareil qu'au dessus genre
+        if (this.sphere.position.x >= 36) {
             this.resetBall();
             this.score1++;
         }
