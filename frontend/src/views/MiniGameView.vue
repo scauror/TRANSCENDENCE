@@ -9,6 +9,7 @@
 			</nav>
 		</header>
 		<main>
+
 		</main>
 		<footer>
 			<div class="footer">
@@ -21,5 +22,4 @@
 <script setup>
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

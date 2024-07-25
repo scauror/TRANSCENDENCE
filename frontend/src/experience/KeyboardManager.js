@@ -14,4 +14,4 @@ class KeyboardManager {
 	}
 }
 
-export const KEYBOARD = new KeyboardManager()
+export let KEYBOARD = new KeyboardManager();

@@ -1,98 +1,46 @@
-
 import * as THREE from 'three';
 import { KEYBOARD } from './KeyboardManager';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
-
-const VELOCITY = 0.4;
+const VELOCITY = 0.25;
 const MAX_ANGLE = 45;
-const VIEW_NEAR = .1;
-const VIEW_FAR = 1000;
-
-///////////////////////////////////////////// Init du pong pour le 3d vue du dessus (fausse 2d en quelque sorte)
 
 export class Game {
 	constructor(numeroShapeRef) {
-		const ASPECT_RATIO = window.innerWidth / window.innerHeight;
-
 		this.score1 = 0;
 		this.score2 = 0;
 
 		this.scene = new THREE.Scene();
-		this.camera = new THREE.PerspectiveCamera(
-			FOV,
-			ASPECT_RATIO,
-			VIEW_NEAR,
-			VIEW_FAR
-		);
-		this.textureLoader = new THREE.TextureLoader();
-
-		this.sphTexture = this.textureLoader.load('./texture/cyberSphere.png');
-		this.sphTexture.minFilter = THREE.LinearFilter;
-
-		this.padTexture = this.textureLoader.load('./texture/cyberPaddle.png');
-		this.padTexture.minFilter = THREE.LinearFilter;
-
-
-		const dracoLoader = new DRACOLoader();
-		this.mapScene = new GLTFLoader();
-		this.mapScene.setDRACOLoader(dracoLoader);
-		this.mapScene.load(
-			data = '/map_scene/tronStadium.glb',
-			onload = (gltf) => {
-				this.scene.add(gltf.scene);
-				gltf.scene.scale.set(20, 20, 20);
-			},
-			onprogress = undefined,
-			onerror = (error) => {
-				console.error('An error happened while loading the GLTF model:', error);
-			}
-		);
+		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 		const geometry = new THREE.BoxGeometry(0.8, 0.5, 5);
-		const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });//({ map: this.padTexture });
+		const material = new THREE.MeshBasicMaterial({ color: 0xff4646 });
 
 		this.cube1 = new THREE.Mesh(geometry, material);
 		this.cube1.position.x = -25;
 		this.cube2 = new THREE.Mesh(geometry, material);
 		this.cube2.position.x = 25;
 
-		this.ballSpeed = { x: 0.4, z: 0.4 };
-
-		const sphGeometry = new THREE.SphereGeometry(0.7, 30, 30);
-		const sphMaterial = new THREE.MeshPhongMaterial({
-			map: this.sphTexture,
-			shininess: 100,
-			specular: new THREE.Color(0xffffff),
-		});
-		this.sphere = new THREE.Mesh(sphGeometry, sphMaterial);
+		this.ballSpeed = { x: 0.2, z: 0.2 };
+		this.sphere = new THREE.Mesh(new THREE.SphereGeometry(0.7, 30, 15), new THREE.MeshBasicMaterial({ color: 0xff4646 }));
 		this.sphere.position.x = 0;
 
-		// Ajouter les lumières
-		this.ambientLight = new THREE.AmbientLight(0xf0f0f0);
-		this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-		this.directionalLight.position.set(5, 10, 5).normalize();
-
-		this.scene.add(this.ambientLight);
-		this.scene.add(this.directionalLight);
 		this.scene.add(this.cube1);
 		this.scene.add(this.cube2);
 		this.scene.add(this.sphere);
 
-		this.camera.position.set(0, 25, 5);
-		this.camera.lookAt(new THREE.Vector3(0, -20, 0));
+		this.camera.position.set(0, 20, 0);
+		this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 		this.paused = false;
 		this.numeroShapeRef = numeroShapeRef;
 
 		window.addEventListener('keydown', (event) => {
-			if (event.key !== ' ')
-				return ;
-			if (this.isGamePaused())
-				this.resumeGame();
-			else
-				this.pauseGame();
+			if (event.key === ' ') {
+				if (this.isGamePaused())
+					this.resumeGame();
+				else
+					this.pauseGame();
+			}
 		});
 	}
 
@@ -236,4 +184,3 @@ export class Game {
 		renderer.render(this.scene, this.camera);
 	}
 }
-
