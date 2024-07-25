@@ -3,7 +3,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.prod
-    command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
+    command: uvicorn transcendance.asgi:application --host 0.0.0.0 --port 8000
     volumes:
       - static_volume:/home/app/web/staticfiles
       - www:/var/www/transcendance
