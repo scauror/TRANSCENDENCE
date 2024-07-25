@@ -4,21 +4,19 @@
   --glow-color: hsl(0, 100%, 59%);
 }
 
+@font-face {
+  font-family: 'SpaceTron';
+  src: url('./fonts/spacetron-51nwz.otf') format('opentype');
+}
+
 * {
 	margin: 0;
 }
 
 body {
-	font-family: 'Bebas Neue', sans-serif;
+	font-family: "SpaceTron", sans-serif;
 	font-size: 1em;
 	background-color: black;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
 }
 
 header, footer {
@@ -42,6 +40,7 @@ header, footer {
 	border-radius: 50%;
 	overflow: hidden;
 	margin: 10px;
+  cursor: pointer;
 	-webkit-box-shadow: inset 0px 0px 1.75em 0px var(--glow-color),
 		0px 0px 1.75em 0px var(--glow-color);
 	-moz-box-shadow: inset 0px 0px 1.75em 0px var(--glow-color),
@@ -52,11 +51,18 @@ header, footer {
 	perspective: 2em;
 }
 
-.main_buttons {
+.main-buttons {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 15px;
+}
+
+.settings-buttons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 70px;
 }
 
 *,
@@ -67,7 +73,7 @@ header, footer {
 
 .title {
 	flex: 1;
-  	color: var(--glow-color);
+	color: var(--glow-color);
 	padding: 0.35em 1em;
 	border: 0.15em solid var(--glow-color);
 	border-radius: 0.45em;
@@ -75,7 +81,33 @@ header, footer {
 	perspective: 2em;
 	text-align: end;
 	letter-spacing: 0.6em;
-	font-family: "Raleway", sans-serif;
+	font-family: "SpaceTron", sans-serif;
+	font-size: 2em;
+	font-weight: 900;
+	-webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+		0px 0px 0.5em 0px var(--glow-color);
+	-moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+		0px 0px 0.5em 0px var(--glow-color);
+	box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+		0px 0px 0.5em 0px var(--glow-color);
+	-webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+		0 0 0.45em var(--glow-color);
+	-moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+			0 0 0.45em var(--glow-color);
+	text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
+}
+
+.title2 {
+  flex: 1;
+  color: var(--glow-color);
+	padding: 0.35em 1em;
+	border: 0.15em solid var(--glow-color);
+	border-radius: 0.45em;
+	background: none;
+	perspective: 2em;
+	text-align: start;
+	letter-spacing: 0.6em;
+	font-family: "SpaceTron", sans-serif;
 	font-size: 2em;
 	font-weight: 900;
 	-webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
@@ -102,13 +134,12 @@ header, footer {
 	border-radius: 0.45em;
 	background: none;
 	perspective: 2em;
-	font-family: "Raleway", sans-serif;
+	text-decoration: none;
+	font-family: "SpaceTron", sans-serif;
 	font-size: 2em; /* Ajustez la taille de la police si nécessaire */
 	font-weight: 900;
 	letter-spacing: 0.2em; /* Ajustez l'espacement entre les lettres */
 	text-align: center; /* Centre le texte à l'intérieur du bouton */
-	text-transform: uppercase; /* Met en majuscules le texte */
-	text-decoration: none; /* Enlève la décoration de texte par défaut */
 	display: flex; /* Utilise Flexbox pour centrer le contenu */
 	justify-content: center; /* Centre horizontalement */
 	align-items: center; /* Centre verticalement */
@@ -119,6 +150,7 @@ header, footer {
 	box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
 	  0px 0px 0.5em 0px var(--glow-color);
 	animation: border-flicker 7s linear infinite;
+	text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
   }
 
 .glowing-txt {
@@ -177,100 +209,40 @@ header, footer {
 }
 
 @keyframes faulty-flicker {
-  0% {
-    opacity: 0.4;
-  }
-  2% {
-    opacity: 0.4;
-  }
-  4% {
-    opacity: 0.5;
-  }
-  19% {
-    opacity: 0.5;
-  }
-  21% {
-    opacity: 0.4;
-  }
-  23% {
-    opacity: 1;
-  }
-  70% {
-	opacity: 0.8;
-  }
-  80% {
-    opacity: 0.5;
-  }
-  83% {
-    opacity: 0.4;
-  }
-  87% {
-    opacity: 0.9;
-  }
-  100% {
-	opacity: 0.6;
-  }
+  0%   {opacity: 0.4;}
+  2%   {opacity: 0.4;}
+  4%   {opacity: 0.5;}
+  19%  {opacity: 0.5;}
+  21%  {opacity: 0.4;}
+  23%  {opacity: 1;}
+  70%  {opacity: 0.8;}
+  80%  {opacity: 0.5;}
+  83%  {opacity: 0.4;}
+  87%  {opacity: 0.9;}
+  100% {opacity: 0.6;}
 }
 
 @keyframes text-flicker {
-  0% {
-    opacity: 0.6;
-  }
-  8% {
-    opacity: 0.8;
-  }
-  9% {
-    opacity: 1;
-  }
-  12% {
-    opacity: 0.4;
-  }
-  20% {
-    opacity: 1;
-  }
-  25% {
-    opacity: 0.4;
-  }
-  30% {
-    opacity: 0.8;
-  }
-  70% {
-    opacity: 0.7;
-  }
-  72% {
-    opacity: 0.6;
-  }
-  77% {
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 0.9;
-  }
+  0%   {opacity: 0.6;}
+  8%   {opacity: 0.8;}
+  9%   {opacity: 1;}
+  12%  {opacity: 0.4;}
+  20%  {opacity: 1;}
+  25%  {opacity: 0.4;}
+  30%  {opacity: 0.8;}
+  70%  {opacity: 0.7;}
+  72%  {opacity: 0.6;}
+  77%  {opacity: 0.9;}
+  100% {opacity: 0.9;}
 }
 
 @keyframes border-flicker {
-  0% {
-    opacity: 0.6;
-  }
-  10% {
-    opacity: 0.9;
-  }
-  19% {
-	opacity: 1;
-  }
-  31% {
-	opacity: 0.7;
-  }
-  42% {
-	opacity: 0.8;
-  }
-  61% {
-	opacity: 0.5;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.9;
-  }
+  0%   {opacity: 0.6;}
+  10%  {opacity: 0.9;}
+  19%  {opacity: 1;}
+  31%  {opacity: 0.7;}
+  42%  {opacity: 0.8;}
+  61%  {opacity: 0.5;}
+  70%  {opacity: 1;}
+  100% {opacity: 0.9;}
 }

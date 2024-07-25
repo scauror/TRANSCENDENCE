@@ -3,19 +3,23 @@
     <header>
       <nav>
         <div class="header">
-          <img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
-          <h1 class="title">MINI GAME: TRON</h1>
+          <router-link to="/">
+            <img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
+          </router-link>
+          <h1 class="title">mini game - tron</h1>
         </div>
       </nav>
     </header>
     <main>
-      
-  </main>
-  <footer>
-			<div class="footer">
-			<img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
-			</div>
-		</footer>
+    </main>
+    <footer>
+      <div class="footer">
+        <h1 class="title2">ft_transcendence</h1>
+        <router-link to="/">
+          <img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
+        </router-link>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -24,5 +28,5 @@
 </script>
 
 <style scoped>
-
+  @import '../styles/MainStyle.css';
 </style>

@@ -3,8 +3,10 @@
   <header>
     <nav>
       <div class="header">
-			<img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
-			<h1 class="title">LEADERBOARD</h1>
+        <router-link to="/">
+          <img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
+        </router-link>
+      <h1 class="title">leaderboard</h1>
       </div>
     </nav>
   </header>
@@ -29,10 +31,13 @@
     </div>
   </main>
   <footer>
-			<div class="footer">
-			<img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
-			</div>
-	</footer>
+      <div class="footer">
+        <h1 class="title2">ft_transcendence</h1>
+        <router-link to="/">
+          <img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
+        </router-link>
+      </div>
+  </footer>
 </div>
 </template>
 
@@ -54,11 +59,14 @@ export default {
 
 <style scoped>
 
+@import '../styles/MainStyle.css';
+
+
 .leaderboard {
   max-width: 600px;
   margin: auto;
   text-align: center;
-  font-family: "Raleway", sans-serif;
+  /* font-family: 'SpaceTron', sans-serif;  marche pas */
   font-weight: bold;
   color: hsl(0, 100%, 59%);
 }

@@ -19,6 +19,6 @@ import { RouterView } from 'vue-router'
 
 <style scoped>
 
-@import './styles/style.css';
+@import './styles/MainStyle.css';
 
 </style>

@@ -81,13 +81,6 @@ export class Game {
                     this.pauseGame();
             }
         });
-        window.addEventListener('resize', this.onWindowResize, false);
-    }
-
-    onWindowResize() {
-        this.camera.aspect = window.innerWidth / window.innerHeight;
-        this.camera.updateProjectionMatrix();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
     moveLeftPaddle(offset) {
