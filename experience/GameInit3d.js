@@ -73,7 +73,7 @@ export class Game {
 
         this.paused = false;
         this.numeroShapeRef = numeroShapeRef;
-    
+
         window.addEventListener('keydown', (event) => {
             if (event.key === ' ') {
                 if (this.isGamePaused())
@@ -82,7 +82,17 @@ export class Game {
                     this.pauseGame();
             }
         });
+
+        // this.onWindowResize = this.onWindowResize.bind(this);
+        // window.addEventListener('resize', this.onWindowResize, false);
     }
+
+    // onWindowResize() {
+    //     this.camera.aspect = window.innerWidth / window.innerHeight;
+    //     this.camera.updateProjectionMatrix();
+    //     this.renderer.setSize(window.innerWidth, window.innerHeight);
+    // }
+
     moveLeftPaddle(offset) {
         if (offset >= 0 && this.cube2.position.z > -12.7 || offset < 0 && this.cube2.position.z < 10) {
             this.cube2.position.z -= offset;
