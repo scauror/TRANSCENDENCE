@@ -6,4 +6,5 @@ COPY	./package*.json .
 RUN		npm install
 COPY	. .
 RUN		npm run build
-RUN		npm run lint
+RUN		mkdir -p /var/www/
+RUN		mv /app/frontend/dist /var/www/transcendance

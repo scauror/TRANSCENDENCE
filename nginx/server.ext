@@ -1,0 +1,5 @@
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid:always,issuer:always
+keyUsage               = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment, keyAgreement, keyCertSign
+subjectAltName         = DNS:lailouezzz.duckdns.org, DNS:aalms.duckdns.org, DNS:localhost
+issuerAltName          = issuer:copy

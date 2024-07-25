@@ -1,4 +1,4 @@
-COMPOSE_FILE	:=	docker-compose.dev.yml
+COMPOSE_FILE	:=	docker-compose.prod.yml
 
 all: run
 

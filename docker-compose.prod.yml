@@ -6,6 +6,7 @@ services:
     command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/home/app/web/staticfiles
+      - www:/var/www/transcendance
       - media_volume:/home/app/web/mediafiles
     expose:
       - 8000
@@ -21,6 +22,7 @@ services:
     command: npm run serve
     volumes:
       - static_volume:/home/app/web/staticfiles
+      - www:/var/www/transcendance
       - media_volume:/home/app/web/mediafiles
     expose:
       - 8080
@@ -31,10 +33,11 @@ services:
     build: ./nginx
     volumes:
       - static_volume:/home/app/web/staticfiles
+      - www:/var/www/transcendance
       - media_volume:/home/app/web/mediafiles
     ports:
-      - 1337:80
-      - 1338:81
+      - 80:80
+      - 443:443
     depends_on:
       - backend
       - frontend
@@ -51,4 +54,5 @@ services:
 volumes:
   postgres_data:
   static_volume:
+  www:
   media_volume:
