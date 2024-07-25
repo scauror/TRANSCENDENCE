@@ -17,25 +17,16 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    command: npm run serve
+    command: npm run dev -- --host
     volumes:
-      - ./frontend:/app/frontend
-      - node_modules:/app/frontend/node_modules
-    expose:
-      - 8080
+      - ./frontend:/app/frontend/
+      - /app/frontend/node_modules/
+    ports:
+      - 5173:5173
     env_file:
       - ./.env.dev
     depends_on:
       - backend
-
-  nginx:
-    build: ./nginx
-    ports:
-      - 1337:80
-      - 1338:81
-    depends_on:
-      - backend
-      - frontend
 
   database:
     image: postgres:15
@@ -46,4 +37,3 @@ services:
 
 volumes:
   postgres_data:
-  node_modules:
