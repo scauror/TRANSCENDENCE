@@ -40,7 +40,7 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
-
+    "users"
 ]
 
 THIRD_PARTY_APPS = [
@@ -87,6 +87,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "transcendance.wsgi.application"
 
+DJOSER = {
+    'USER_ID_FIELD': 'username',
+    'LOGIN_FIELD': 'email',
+}
+
+AUTH_USER_MODEL = "users.User"
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
