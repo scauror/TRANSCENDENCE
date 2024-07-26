@@ -1,11 +1,12 @@
 <template>
 	<div id="settings">
-		<!-- Header: SETTINGS -->
 	</div>
 </template>
 
 <script setup>
-</script>
+import utils from '@/utils'
+
+utils.updatePageTitle('SETTINGS');</script>
 
 <style scoped>
 </style>

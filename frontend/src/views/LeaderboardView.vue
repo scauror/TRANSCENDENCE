@@ -20,6 +20,10 @@
 </template>
 
 <script setup>
+import utils from '@/utils'
+
+utils.updatePageTitle('LEADERBOARD');
+
 const players = [
 	{ id: 1, name: 'Alice', score: 1500 },
 	{ id: 2, name: 'Bob', score: 1400 },

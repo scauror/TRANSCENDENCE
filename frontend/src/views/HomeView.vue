@@ -10,6 +10,9 @@
 
 <script setup>
 import GlowingButton from '@/components/GlowingButton.vue';
+import utils from '@/utils'
+
+utils.updatePageTitle('FT_TRANSCENDENCE');
 
 const menu_buttons = [
 	{ text: 'play', dest: '/play' },
@@ -18,9 +21,6 @@ const menu_buttons = [
 	{ text: 'profile', dest: '/profile' },
 	{ text: 'settings', dest: '/settings' },
 ]
-
-// const store = useStore();
-// store.dispatch('changeTitle', 'coucou bite')
 </script>
 
 <style scoped>

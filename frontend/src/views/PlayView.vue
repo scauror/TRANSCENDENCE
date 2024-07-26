@@ -16,6 +16,9 @@
 </template>
 
 <script setup>
+import utils from '@/utils'
+
+utils.updatePageTitle('PLAY');
 </script>
 
 <style scoped>

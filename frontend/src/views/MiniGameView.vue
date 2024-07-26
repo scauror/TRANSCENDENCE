@@ -1,10 +1,12 @@
 <template>
 	<div id="game">
-		<!-- Header: MINI GAME: TRON -->
 	</div>
 </template>
 
 <script setup>
+import utils from '@/utils'
+
+utils.updatePageTitle('MINI GAME: TRON');
 </script>
 
 <style scoped></style>

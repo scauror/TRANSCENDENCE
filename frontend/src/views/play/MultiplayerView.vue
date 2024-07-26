@@ -6,6 +6,9 @@
 </template>
 
 <script setup>
+import utils from '@/utils'
+
+utils.updatePageTitle('PLAY - MULTIPLAYER');
 </script>
 
 <style scoped>
