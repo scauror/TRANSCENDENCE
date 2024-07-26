@@ -14,6 +14,6 @@
 import { RouterView } from 'vue-router'
 </script>
 
-<style scoped>
+<style>
 @import './styles/style.css';
 </style>
