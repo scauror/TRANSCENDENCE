@@ -24,6 +24,9 @@
 import { ref, onMounted } from 'vue';
 import * as THREE from 'three';
 import { Game } from '../../experience/GameInit';
+import utils from '@/utils'
+
+utils.updatePageTitle('PLAY - SOLO');
 
 const canvasContainer = ref(null);
 const numeroShape = ref(null);
