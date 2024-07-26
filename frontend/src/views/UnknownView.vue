@@ -1,6 +1,6 @@
 <template>
-	<div id="settings">
-		<!-- Header: SETTINGS -->
+	<div id="aled">
+		Page not found
 	</div>
 </template>
 
@@ -8,4 +8,7 @@
 </script>
 
 <style scoped>
+#aled {
+	color: white;
+}
 </style>

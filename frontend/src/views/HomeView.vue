@@ -1,26 +1,11 @@
 <template>
-	<header>
-		<nav>
-			<div class="header">
-				<img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
-				<h1 class="title">FT_TRANSCENDENCE</h1>
-			</div>
-		</nav>
-	</header>
-	<body>
-		<section class="main_buttons">
-			<GlowingButton
-				v-for="menu_button in menu_buttons"
-				:text="menu_button.text"
-				:dest="menu_button.text"
-				/>
-		</section>
-	</body>
-	<footer>
-		<div class="footer">
-			<img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
-		</div>
-	</footer>
+	<section class="main_buttons">
+		<GlowingButton
+			v-for="menu_button in menu_buttons"
+			:text="menu_button.text"
+			:dest="menu_button.text"
+			/>
+	</section>
 </template>
 
 <script setup>
@@ -33,6 +18,9 @@ const menu_buttons = [
 	{ text: 'profile', dest: '/profile' },
 	{ text: 'settings', dest: '/settings' },
 ]
+
+// const store = useStore();
+// store.dispatch('changeTitle', 'coucou bite')
 </script>
 
 <style scoped>

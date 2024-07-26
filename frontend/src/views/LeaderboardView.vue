@@ -1,55 +1,31 @@
 <template>
-	<div id="page">
-		<header>
-			<nav>
-				<div class="header">
-					<img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
-					<h1 class="title">LEADERBOARD</h1>
-				</div>
-			</nav>
-		</header>
-		<main>
-			<div class="leaderboard">
-				<table>
-					<thead>
-						<tr>
-							<th>Rank</th>
-							<th>Name</th>
-							<th>Score</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="(player, index) in players" :key="player.id">
-							<td>{{ index + 1 }}</td>
-							<td>{{ player.name }}</td>
-							<td>{{ player.score }}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</main>
-		<footer>
-			<div class="footer">
-				<img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
-			</div>
-		</footer>
+	<div class="leaderboard">
+		<table>
+			<thead>
+				<tr>
+					<th>Rank</th>
+					<th>Name</th>
+					<th>Score</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="(player, index) in players" :key="player.id">
+					<td>{{ index + 1 }}</td>
+					<td>{{ player.name }}</td>
+					<td>{{ player.score }}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </template>
 
-<script>
-export default {
-	name: 'LeaderboardView',
-	data() {
-		return {
-			players: [
-				{ id: 1, name: 'Alice', score: 1500 },
-				{ id: 2, name: 'Bob', score: 1400 },
-				{ id: 3, name: 'Charlie', score: 1300 },
-				// Exemple naze pour l'instant ici mais va falloir afficher l'entierete du tableau avec iterateur ou variable
-			]
-		}
-	}
-}
+<script setup>
+const players = [
+	{ id: 1, name: 'Alice', score: 1500 },
+	{ id: 2, name: 'Bob', score: 1400 },
+	{ id: 3, name: 'Charlie', score: 1300 },
+	// Exemple naze pour l'instant ici mais va falloir afficher l'entierete du tableau avec iterateur ou variable
+];
 </script>
 
 <style scoped>

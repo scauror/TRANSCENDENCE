@@ -10,6 +10,7 @@ import SoloView from '@/views/play/SoloView.vue'
 import LocalView from '@/views/play/LocalView.vue'
 import MultiplayerView from '@/views/play/MultiplayerView.vue'
 import TournamentView from '@/views/play/TournamentView.vue'
+import UnknownView from '@/views/UnknownView.vue'
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -63,6 +64,11 @@ const router = createRouter({
 			path: '/settings',
 			name: 'SettingsView',
 			component: SettingsView
+		},
+		{
+			path: '/:pathMatch(.*)',
+			name: 'UnknownView',
+			component: UnknownView
 		}
 	]
 })
