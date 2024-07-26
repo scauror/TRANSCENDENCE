@@ -1,13 +1,5 @@
 <template>
-	<div id="app">
-		<header>
-		</header>
-		<main>
-			<RouterView />
-		</main>
-		<footer>
-		</footer>
-	</div>
+	<RouterView />
 </template>
 
 <script setup>
