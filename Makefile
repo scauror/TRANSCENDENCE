@@ -4,25 +4,33 @@
 # as a command line argument.
 BUILD_MODE			:=	dev
 
+# Checks if the `BUILD_MODE` is a correct one.
 ifeq ($(BUILD_MODE),dev)
 COMPOSE_FILE		:=	docker-compose.dev.yml
 else ifeq ($(BUILD_MODE),prod)
 COMPOSE_FILE		:=	docker-compose.prod.yml
 else
-COMPOSE_FILE		:=	$(error "$(BUILD_MODE)" is not a valid build mode.)
+$(error "$(BUILD_MODE)" is not a valid build mode.)
 endif
 
+# Checks for the user executing the Makefile:
+# - If they needs root privilege
+# - If so, if they have root privilege.
 ifeq ($(shell groups | grep -o docker),)
+	ifneq ($(shell whoami),root)
+		ifeq ($(shell sudo -n true 2>&1),)
 SUDO				:=	sudo
+		else
+$(error You must acquire root privileges)
+		endif
+	endif
 endif
-
-.PHONY: all run build build-nocache down down-volumes re rebuild rebuild-nocache
 
 all: run
 
 # If the docker is already launched, don't rebuilt it.
 # If you want to rebuilt it, use the `build` rule.
-ifeq ($(shell docker-compose -f $(COMPOSE_FILE) ps --services),)
+ifeq ($(shell $(SUDO) docker-compose -f $(COMPOSE_FILE) ps --services),)
 run: build
 else
 run:
@@ -46,3 +54,5 @@ re: down run
 rebuild: down build run
 
 rebuild-nocache: down build run
+
+.PHONY: all run build build-nocache down down-volumes re rebuild rebuild-nocache
