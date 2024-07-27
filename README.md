@@ -21,7 +21,7 @@ The default build mode is [`dev`](#dev).
 To chose the build mode, you can either
 modify the `BUILD_MODE` variable in the `Makefile` or
 pass the build mode as a command-line argument to the `make` command:
-> `make [rule] BUILD_MODE=[BUILD_MODE]`
+> make [rule] BUILD_MODE=[BUILD_MODE]
 
 Here are the rules:
 - #### `all`
