@@ -1,6 +1,8 @@
 <template>
 	<div class="footer">
-		<img class="logo" src="@/assets/logo.png" alt="Logo Pong Ft_Transcendence">
+		<router-link to="/">
+			<img class="logo" src="@assets/logo.png" alt="Logo Pong Ft_Transcendence">
+		</router-link>
 	</div>
 </template>
 

@@ -1,4 +1,7 @@
 <template>
+	<head>
+		<title> {{ $store.getters.getPageTitle }} </title>
+	</head>
 	<header>
 		<HeaderBar />
 	</header>
@@ -14,10 +17,6 @@
 import { RouterView } from 'vue-router'
 import FooterBar from '@/components/FooterBar.vue';
 import HeaderBar from '@/components/HeaderBar.vue';
-// import useStore from 'vuex'
-
-// const store = useStore();
-// store.dispatch('changeTitle', 'coucou bite')
 </script>
 
 <style>

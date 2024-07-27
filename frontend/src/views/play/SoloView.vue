@@ -1,21 +1,22 @@
 <template>
-	<div id="solo">
+	<div id="local">
 		<header>
 			<h1 class="player">
-				player 1: {{ player1 }}
+				player 1: {{ player1 }} <br/>
+				<h3 class="commands">commands : '← + →'</h3>
 			</h1>
 			<h1 class="score-header">
 				score: {{ score1 }} - {{ score2 }}
 			</h1>
 			<h1 class="player">
-				player 2: {{ player2 }}
+				player 2: {{ player2 }} <br/>
 			</h1>
 		</header>
 		<main>
 			<div class="numero_counting_wrapper">
 				<div ref="numeroShape" class="numero_shape"></div>
 			</div>
-			<div ref="canvasContainer"></div>
+			<div class="troad" ref="canvasContainer"></div>
 		</main>
 	</div>
 </template>
@@ -23,10 +24,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import * as THREE from 'three';
-import { Game } from '../../experience/GameInit';
-import utils from '@/utils'
+import { Game } from '../../experience/GameInit3d';
+import utils from '@utils'
 
-utils.updatePageTitle('PLAY - SOLO');
+utils.updatePageTitle('SOLO - PLAY');
 
 const canvasContainer = ref(null);
 const numeroShape = ref(null);
@@ -34,8 +35,8 @@ const numeroShape = ref(null);
 const score1 = ref(0);
 const score2 = ref(0);
 
-const player1 = ref("tintin");
-const player2 = ref("milou");
+const player1 = ref("you");
+const player2 = ref("pong bot");
 
 let renderer;
 let game;
@@ -47,7 +48,7 @@ onMounted(() => {
 	canvasContainer.value.appendChild(renderer.domElement);
 
 	game = new Game(numeroShape);
-	game.countdown();
+	// game.countdown();
 	animate();
 });
 
@@ -71,6 +72,10 @@ function animate() {
 	font-style: normal;
 }
 
+main {
+	border: 2px solid red;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -88,11 +93,19 @@ header {
 	padding: 10px;
 }
 
+.troad {
+	border: 2px solid red
+}
+
+.commands {
+	font-size: 0.5em;
+}
+
 .numero_counting_wrapper {
 	background-color: #000000;
 	margin: 0 auto;
-	width: 200px;
-	height: 200px;
+	width: 50px;
+	height: 50px;
 }
 
 .numero_shape {

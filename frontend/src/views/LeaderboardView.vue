@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import utils from '@/utils'
+import utils from '@utils'
 
 utils.updatePageTitle('LEADERBOARD');
 

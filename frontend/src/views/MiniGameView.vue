@@ -4,9 +4,10 @@
 </template>
 
 <script setup>
-import utils from '@/utils'
+import utils from '@utils'
 
-utils.updatePageTitle('MINI GAME: TRON');
+utils.updatePageTitle('TRON - MINI GAME');
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

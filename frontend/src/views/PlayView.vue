@@ -1,24 +1,25 @@
 <template>
 	<section class="main_buttons">
-		<router-link to="/play/solo" class="glowing-btn">
-			<span class="glowing-txt">SOLO<span class="faulty-letter"> VS </span>IA</span>
-		</router-link>
-		<router-link to="/play/local" class="glowing-btn">
-			<span class="glowing-txt">LOC<span class="faulty-letter">A</span>L</span>
-		</router-link>
-		<router-link to="/play/multiplayer" class="glowing-btn">
-			<span class="glowing-txt">MULT<span class="faulty-letter">IP</span>LAYER</span>
-		</router-link>
-		<router-link to="/play/tournament" class="glowing-btn">
-			<span class="glowing-txt">T<span class="faulty-letter">OURNAM</span>ENT</span>
-		</router-link>
+		<GlowingButton
+			v-for="menu_button in menu_buttons"
+			:text="menu_button.text"
+			:dest="menu_button.dest"
+			/>
 	</section>
 </template>
 
 <script setup>
-import utils from '@/utils'
+import GlowingButton from '@/components/GlowingButton.vue';
+import utils from '@utils'
 
 utils.updatePageTitle('PLAY');
+
+const menu_buttons = [
+	{ text: 'solo', dest: 'play/solo'},
+	{ text: 'local', dest: 'play/local'},
+	{ text: 'multiplayer', dest: 'play/multiplayer'},
+	{ text: 'tournament', dest: 'play/tournament'},
+]
 </script>
 
 <style scoped>
