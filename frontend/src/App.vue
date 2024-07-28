@@ -2,15 +2,17 @@
 	<head>
 		<title> {{ $store.getters.getPageTitle }} </title>
 	</head>
-	<header>
-		<HeaderBar />
-	</header>
 	<body>
-		<RouterView />
+		<header>
+			<HeaderBar />
+		</header>
+		<main>
+			<RouterView />
+		</main>
+		<footer>
+			<FooterBar />
+		</footer>
 	</body>
-	<footer>
-		<FooterBar />
-	</footer>
 </template>
 
 <script setup>

@@ -1,5 +1,5 @@
 <template>
-	<section class="main_buttons">
+	<section class="main-buttons">
 		<GlowingButton
 			v-for="menu_button in menu_buttons"
 			:text="menu_button.text"

@@ -17,6 +17,15 @@ body {
 	font-family: "SpaceTron", sans-serif;
 	font-size: 1em;
 	background-color: black;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+}
+
+main {
+	display: grid;
+	flex: 1;
 }
 
 header,
@@ -24,6 +33,7 @@ footer {
 	background-color: black;
 	margin: 5px;
 }
+
 
 .header {
 	display: flex;
@@ -33,6 +43,7 @@ footer {
 .footer {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 }
 
 .logo {
@@ -52,11 +63,19 @@ footer {
 	perspective: 2em;
 }
 
+.minimized {
+	width: 75px;
+	height: 75px;
+}
+
 .main-buttons {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 15px;
+	justify-content: center;
+	gap: 10px;
+	align-self: center;
+	justify-self: center;
 }
 
 .settings-buttons {
