@@ -2,12 +2,10 @@
 	<router-link v-bind:to="dest" class="glowing-btn">
 		<GlowingText
 			v-for="chunk in chunks"
-			:glowing="chunk.faulty"
+			:glowing="chunk.glowing"
 			:text="chunk.text"
 			/>
-		<!-- <span class="glowing-txt">{{ text }}</span> -->
 	</router-link>
-	<!-- <span class="glowing-txt">P<span class="faulty-letter">L</span>AY</span> -->
 </template>
 
 <script setup>

@@ -1,8 +1,5 @@
 <template>
-	<span v-if="glowing" class="glowing-txt">
-		{{ text }}
-	</span>
-	<span v-else class="faulty-letter">
+	<span :class="glowing ? 'glowing-txt' : 'faulty-letter'">
 		{{ text }}
 	</span>
 </template>
