@@ -1,30 +1,10 @@
 <template>
-	<section class="settings-buttons">
-		<table>
-			<tr>
-				<td></td>
-				<td>
-					<GlowingButton text="general" dest="/settings/settings_general" />
-				</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>
-					<GlowingButton text="graphics" dest="/settings/settings_graphics" />
-				</td>
-				<td></td>
-				<td>
-					<GlowingButton text="credits" dest="/settings/credits" />
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>
-					<GlowingButton text="audio" dest="/settings/settings_audio" />
-				</td>
-				<td></td>
-			</tr>
-		</table>
+	<section class="menu-buttons">
+		<GlowingButton
+			v-for="menu_button in menu_buttons"
+			:text="menu_button.text"
+			:dest="menu_button.dest"
+			/>
 	</section>
 </template>
 
@@ -33,6 +13,13 @@ import GlowingButton from '@/components/GlowingButton.vue';
 import utils from '@utils'
 
 utils.updatePageTitle('SETTINGS');
+
+const menu_buttons = [
+	{ text:"general", dest:"/settings/settings_general" },
+	{ text:"graphics", dest:"/settings/settings_graphics" },
+	{ text:"credits", dest:"/settings/credits" },
+	{ text:"audio", dest:"/settings/settings_audio" },
+];
 </script>
 
 <style scoped>
