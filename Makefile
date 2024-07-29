@@ -16,8 +16,8 @@ endif
 # Checks for the user executing the Makefile:
 # - If they needs root privilege
 # - If so, if they have root privilege.
-ifeq ($(shell groups | grep -o docker),)
-	ifneq ($(shell whoami),root)
+ifneq ($(shell whoami),root)
+	ifneq ($(shell docker ps 2>&1 >/dev/null | grep 'permission denied'),)
 		ifeq ($(shell sudo -n true 2>&1),)
 SUDO				:=	sudo
 		else
