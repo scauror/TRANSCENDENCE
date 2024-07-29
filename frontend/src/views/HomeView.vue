@@ -1,26 +1,20 @@
 <template>
-	<section class="main_buttons">
-		<GlowingButton
-			v-for="menu_button in menu_buttons"
-			:text="menu_button.text"
-			:dest="menu_button.dest"
-			/>
-	</section>
+	<ButtonList :buttons="buttons"/>
 </template>
 
 <script setup>
-import GlowingButton from '@/components/GlowingButton.vue';
+import ButtonList from '@components/ButtonList.vue'
 import utils from '@utils'
 
 utils.updatePageTitle('FT_TRANSCENDENCE');
 
-const menu_buttons = [
+const buttons = [
 	{ text: 'play', dest: 'play' },
 	{ text: 'minigame', dest: 'minigame' },
 	{ text: 'leaderboard', dest: 'leaderboard' },
 	{ text: 'profile', dest: 'profile' },
 	{ text: 'settings', dest: 'settings' },
-]
+];
 </script>
 
 <style scoped>

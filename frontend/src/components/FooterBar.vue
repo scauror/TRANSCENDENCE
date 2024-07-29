@@ -1,13 +1,23 @@
 <template>
-	<div class="footer">
+	<nav class="footer">
 		<router-link to="/">
-			<img class="logo" src="@assets/logo.png" alt="Logo Pong Ft_Transcendence">
+			<TranscendenceLogo class="minimized" />
 		</router-link>
-	</div>
+	</nav>
 </template>
 
 <script setup>
+import TranscendenceLogo from '@components/TranscendenceLogo.vue';
 </script>
 
 <style scoped>
+.minimized {
+	width: 5vh;
+	height: 5vh;
+}
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 </style>
