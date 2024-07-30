@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import UnknownView from '@/views/UnknownPageView.vue'
+import PlayView from '@/views/PlayView.vue'
+import SoloView from '@/views/play/SoloView.vue'
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -10,16 +12,16 @@ const router = createRouter({
 			name: 'HomeView',
 			component: HomeView
 		},
-		// {
-		// 	path: '/play',
-		// 	name: 'PlayView',
-		// 	component: PlayView
-		// },
-		// {
-		// 	path: '/play/solo',
-		// 	name: 'SoloView',
-		// 	component: SoloView
-		// },
+		{
+			path: '/play',
+			name: 'PlayView',
+			component: PlayView
+		},
+		{
+			path: '/play/solo',
+			name: 'SoloView',
+			component: SoloView
+		},
 		// {
 		// 	path: '/play/local',
 		// 	name: 'LocalView',
