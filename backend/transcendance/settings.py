@@ -45,9 +45,8 @@ PROJECT_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",
-    "rest_framework.authtoken",
+    'rest_framework_simplejwt',
     "corsheaders",
-    "djoser",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
@@ -86,11 +85,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "transcendance.wsgi.application"
-
-DJOSER = {
-    'USER_ID_FIELD': 'username',
-    'LOGIN_FIELD': 'email',
-}
 
 AUTH_USER_MODEL = "users.User"
 
@@ -136,6 +130,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# JWT settings
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
+    'SLIDING_TOKEN_REFRESH_LIFETIME_LATE_USER': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME_LATE_USER': timedelta(days=30),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
