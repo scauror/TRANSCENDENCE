@@ -4,6 +4,7 @@
 			v-for="chunk in chunks"
 			:glowing="chunk.glowing"
 			:text="chunk.text"
+			:class="chunk.index == 0 ? '' : 'padded_text'"
 			/>
 	</router-link>
 </template>
@@ -14,11 +15,13 @@ import GlowingText from '@components/GlowingText.vue';
 function createTextChuks(text) {
 	let chunks = [];
 	let glowing = Math.random() > .7;
+	let index = 0;
 	while (text.length > 0)
 	{
 		const end_index = 1 + Math.floor(Math.random() * (text.length - 1))
 		let chunk = text.substring(0, end_index);
 		chunks.push({
+			index: index++,
 			text: chunk,
 			glowing: glowing
 		});
@@ -33,6 +36,10 @@ const chunks = createTextChuks(props.text);
 </script>
 
 <style scoped>
+.padded_text {
+	margin-left: 0.2em;
+}
+
 .glowing_button {
 	position: relative;
 	color: var(--glow-color);
