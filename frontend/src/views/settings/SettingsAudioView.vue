@@ -2,8 +2,8 @@
 	<div class="audio-menu">
 		<audio ref="audio" src="@/musics/guapman.mp3" loop></audio>
 		<div class="music-options">
-			<button class="glowing-btn" @click="playAudio">Musique 1</button>
-			<button class="glowing-btn" @click="playAudio">Musique 2</button>
+			<GlowingButton :text="'Musique 1'" dest=""/>
+			<GlowingButton :text="'Musique 2'" dest=""/>
 		</div>
 		<div class="volume-button-knob" ref="volumeButtonKnob">
 			<svg viewBox="0 0 600 600">
@@ -41,19 +41,20 @@
 				</g>
 			</svg>
 		</div>
-		<span class="volume-meter">{{ settings.volume * 100 }}%</span>
+		<!-- <span class="volume-meter">{{ settings.volume * 100 }}%</span> -->
 		<div class="music-options">
-			<button class="glowing-btn" @click="playAudio">Musique 3</button>
-			<button class="glowing-btn" @click="playAudio">Musique 4</button>
+			<GlowingButton :text="'Musique 3'"/>
+			<GlowingButton :text="'Musique 4'"/>
 		</div>
 	</div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import GlowingButton from '@/components/GlowingButton.vue';
 import utils from '@utils'
 
-utils.updatePageTitle('AUDIO - SETTINGS');
+utils.updatePageTitle('audio - settings');
 
 const audio = ref(null);
 
@@ -206,27 +207,39 @@ function touchHandler(e) {
 .audio-menu {
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: center;
+	width: 100%;
+	height: 100vh;
+	padding: 10px;
+	box-sizing: border-box;
 }
 
 .music-options {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	gap: 150px;
+}
+
+.left-options {
+	margin-right: 20px;
+}
+
+.right-options {
+	margin-left: 20px;
 }
 
 .volume-button-knob {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 50vh;
-	margin: 80px;
+	width: 600px;
+	height: 600px;
+}
 
-	svg {
-		display: block;
-		width: 600px;
-		height: 600px;
-	}
+.volume-button-knob svg {
+	width: 100%;
+	height: 100%;
 }
 
 .circle {
@@ -266,7 +279,7 @@ function touchHandler(e) {
 	stroke: hsla(var(--h), var(--s), 55%, var(--a));
 	transform: rotate(var(--deg));
 	transform-origin: 300px 300px;
-	/* Assurer que les lignes sont centrées autour du milieu du SVG */
+	/* Ensure lines are centered around the middle of the SVG */
 
 	&:hover,
 	&.active {
@@ -275,4 +288,19 @@ function touchHandler(e) {
 		filter: url(#shadow);
 	}
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.audio-menu {
+		flex-direction: column;
+		height: auto;
+	}
+
+	.volume-button-knob {
+		width: 100%;
+		height: auto;
+		margin: 10px 0;
+	}
+}
+
 </style>

@@ -6,7 +6,7 @@
 <script setup>
 import utils from '@utils'
 
-utils.updatePageTitle('TRON - MINI GAME');
+utils.updatePageTitle('tron - mini game');
 </script>
 
 <style scoped>

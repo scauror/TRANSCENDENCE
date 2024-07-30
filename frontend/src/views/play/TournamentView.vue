@@ -7,7 +7,7 @@
 <script setup>
 import utils from '@utils'
 
-utils.updatePageTitle('TOURNAMENT - PLAY');
+utils.updatePageTitle('tournament - play');
 </script>
 
 <style scoped>

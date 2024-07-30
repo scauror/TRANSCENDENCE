@@ -15,7 +15,7 @@ import PortraitContainer from '@/components/PortraitContainer.vue';
 import { devs } from '@assets/data/devs.json'
 import utils from '@utils'
 
-utils.updatePageTitle('CREDITS - SETTINGS');
+utils.updatePageTitle('credit$');
 </script>
 
 <style scoped>

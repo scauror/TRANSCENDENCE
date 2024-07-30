@@ -21,7 +21,7 @@
 <script setup>
 import utils from '@utils'
 
-utils.updatePageTitle('GRAPHICS - SETTINGS');
+utils.updatePageTitle('graphics - settings');
 
 const selectPlayboard = (theme) => {
 	console.log(`Selected theme: ${theme}`);
@@ -51,7 +51,7 @@ const selectPlayboard = (theme) => {
 
 .playboard-selector {
 	text-align: center;
-	font-family: 'Raleway', sans-serif;
+	font-family: 'SpaceTron', sans-serif;
 	padding: 10px;
 	color: var(--glow-color);
 	border: 5px solid var(--glow-color);

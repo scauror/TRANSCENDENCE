@@ -22,7 +22,7 @@
 <script setup>
 import utils from '@utils'
 
-utils.updatePageTitle('LEADERBOARD');
+utils.updatePageTitle('leaderboard');
 
 const players = [
 	{ id: 1, name: 'Alice', score: 1500 },
@@ -40,10 +40,8 @@ const players = [
 	font-family: "Raleway", sans-serif;
 	font-weight: bold;
 	color: hsl(0, 100%, 59%);
-}
-
-h1 {
-	color: hsl(0, 100%, 59%);
+	--size-factor: (0.00188323 * 70vw);
+	font-size: calc(12 * var(--size-factor));
 }
 
 table {

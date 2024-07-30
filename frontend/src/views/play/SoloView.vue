@@ -2,7 +2,7 @@
 	<div id="local">
 		<header>
 			<h1 class="player">
-				player 1: {{ player1 }} <br/>
+				player 1: {{ player1 }} <br>
 				<h3 class="commands">commands : '← + →'</h3>
 			</h1>
 			<h1 class="score-header">
@@ -24,10 +24,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import * as THREE from 'three';
-import { Game } from '../../experience/GameInit3d';
+import { Game } from '../../experience/GameInit';
 import utils from '@utils'
 
-utils.updatePageTitle('SOLO - PLAY');
+utils.updatePageTitle('solo - play');
 
 const canvasContainer = ref(null);
 const numeroShape = ref(null);
@@ -41,14 +41,41 @@ const player2 = ref("pong bot");
 let renderer;
 let game;
 
+const game_config1 = {
+    camera: {
+        position: {
+            x: 60,
+            y: 5,
+            z: 0
+        },
+        lookat: {
+            x: 0,
+            y: -20,
+            z: 0
+        },
+    },
+    mappings: {
+        paddles: {
+            left: {
+                go_left: 'a',
+                go_right: 'd'
+            },
+            right: {
+                go_left: 'ArrowLeft',
+                go_right: 'ArrowRight'
+            }
+        }
+    }
+};
+
 onMounted(() => {
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(window.innerWidth, window.innerHeight);
 
 	canvasContainer.value.appendChild(renderer.domElement);
 
-	game = new Game(numeroShape);
-	// game.countdown();
+	game = new Game(numeroShape, game_config1);
+	game.countdown();
 	animate();
 });
 

@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import GlowingButton from '@components/GlowingButton.vue';
+import GlowingButton from '@/components/GlowingButton.vue';
 
 const props = defineProps([ 'buttons' ]);
 </script>

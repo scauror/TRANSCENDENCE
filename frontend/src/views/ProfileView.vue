@@ -1,9 +1,14 @@
 <template>
 	<div class="profile">
-		<div class="profile-info">
-			<h2>Personal Information</h2>
-			<p> Name - {{ data.profile.fullname }} </p>
-			<p>Email - {{ data.profile.email }} </p>
+		<div class="profile-container">
+			<div class="profile-info">
+				<h2>Personal Information</h2>
+				<p>Name - {{ data.profile.fullname }}</p>
+				<p>Email - {{ data.profile.email }}</p>
+			</div>
+			<div class="profile-photo">
+				<img class="photo" :src="utils.loadAsset(data.profile.profile_picture_path)"/>
+			</div>
 		</div>
 		<div class="profile-container">
 			<div class="profile-stats">
@@ -15,12 +20,9 @@
 					<li> Rank - Gold </li>
 				</ul>
 			</div>
-			<div class="profile-photo">
-				<img class="photo" :src="utils.loadAsset(data.profile.profile_picture_path)"/>
-			</div>
 		</div>
 		<div class="profile-activity">
-			<h2> Last Games </h2>
+			<h2>Last Games</h2>
 			<ul>
 				<li v-for="match in data.match_history">
 					{{ data.profile.username }} Vs {{ match.opponent }} | {{ match.score }} - {{ match.opponent_score }} |
@@ -29,7 +31,6 @@
 		</div>
 	</div>
 </template>
-
 
 <script setup>
 import utils from '@utils'
@@ -69,12 +70,14 @@ function getWinRate(data) {
 	return Math.round(100 * data.stats.played / data.stats.wins);
 }
 
-utils.updatePageTitle(`${data.profile.username} - PROFILE`);
+utils.updatePageTitle(`${data.profile.username} - profile`);
 </script>
 
 <style scoped>
 .profile {
 	color: var(--glow-color);
+	--size-factor: (0.00188323 * 70vw);
+	font-size: calc(8 * var(--size-factor));
 }
 
 .profile-container {
@@ -103,10 +106,16 @@ utils.updatePageTitle(`${data.profile.username} - PROFILE`);
 	object-fit: cover;
 	border: 0.2em solid var(--glow-color);
 	box-shadow: 0px 0px 0.5em 0px var(--glow-color);
+	-webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+		0px 0px 0.5em 0px var(--glow-color);
+	-moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+		0px 0px 0.5em 0px var(--glow-color);
 }
 
 .profile-stats {
 	flex: 1;
+	margin: 20px;
+	padding: 20px;
 }
 
 .profile-stats h2 {
@@ -140,13 +149,12 @@ utils.updatePageTitle(`${data.profile.username} - PROFILE`);
 }
 
 .profile-activity h2 {
-	margin-bottom: 10px;
+	margin-left: 20px;
+	padding: 20px;
 }
 
 .profile-activity ul {
 	list-style-type: none;
-	padding: 0;
-	margin: 0;
 }
 
 .profile-activity li {
@@ -156,19 +164,11 @@ utils.updatePageTitle(`${data.profile.username} - PROFILE`);
 .profile-info {
 	margin: 20px;
 	padding: 20px;
-	border: 0.2em solid var(--glow-color);
-	border-radius: 0.45em;
 	background: none;
-	-webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-		0px 0px 0.5em 0px var(--glow-color);
-	-moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-		0px 0px 0.5em 0px var(--glow-color);
-	box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-		0px 0px 0.5em 0px var(--glow-color);
 	text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
 }
 
-.profile-info h2 {
+/* .profile-info h2 {
 	margin-bottom: 10px;
-}
+} */
 </style>

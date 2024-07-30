@@ -8,7 +8,7 @@
 <script setup>
 import utils from '@utils'
 
-utils.updatePageTitle('MULTIPLAYER - PLAY');
+utils.updatePageTitle('multiplayer - play');
 </script>
 
 <style scoped>

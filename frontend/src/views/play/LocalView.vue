@@ -1,34 +1,30 @@
 <template>
 	<div id="local">
-		<header>
-			<h1 class="player">
-				player 1: {{ player1 }} <br>
-				<h3 class="commands">commands : 'w + s'</h3>
-			</h1>
-			<h1 class="score-header">
-				score: {{ score1 }} - {{ score2 }}
-			</h1>
-			<h1 class="player">
-				player 2: {{ player2 }} <br>
-				<h3 class="commands">commands : '↑ + ↓'</h3>
-			</h1>
-		</header>
-		<main>
-			<div class="numero_counting_wrapper">
-				<div ref="numeroShape" class="numero_shape"></div>
-			</div>
-			<div class="troad" ref="canvasContainer"></div>
-		</main>
+		<h1 class="player">
+			player 1: {{ player1 }} <br>
+			<h3 class="commands">commands : 'w + s'</h3>
+		</h1>
+		<h1 class="score-header">
+			score: {{ score1 }} - {{ score2 }}
+		</h1>
+		<h1 class="player">
+			player 2: {{ player2 }} <br>
+			<h3 class="commands">commands : '↑ + ↓'</h3>
+		</h1>
 	</div>
+	<div class="numero_counting_wrapper">
+		<div ref="numeroShape" class="numero_shape"></div>
+	</div>
+	<div class="game" ref="canvasContainer"></div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import * as THREE from 'three';
-import { Game } from '../../experience/GameInit2d';
+import { Game } from '../../experience/GameInit';
 import utils from '@utils'
 
-utils.updatePageTitle('LOCAL - PLAY');
+utils.updatePageTitle('local - play');
 
 const canvasContainer = ref(null);
 const numeroShape = ref(null);
@@ -42,14 +38,41 @@ const player2 = ref("milou");
 let renderer;
 let game;
 
+const game_config2 = {
+    camera: {
+        position: {
+            x: 0,
+            y: 25,
+            z: 5
+        },
+        lookat: {
+            x: 0,
+            y: -20,
+            z: 0
+        },
+    },
+    mappings: {
+        paddles: {
+            left: {
+                go_left: 's',
+                go_right: 'w'
+            },
+            right: {
+                go_left: 'ArrowDown',
+                go_right: 'ArrowUp'
+            }
+        }
+    }
+};
+
 onMounted(() => {
 	renderer = new THREE.WebGLRenderer();
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setSize(window.innerWidth * 0.9, window.innerHeight * 0.9);
 
 	canvasContainer.value.appendChild(renderer.domElement);
 
-	game = new Game(numeroShape);
-	// game.countdown();
+	game = new Game(numeroShape, game_config2);
+	game.countdown();
 	animate();
 });
 
@@ -73,11 +96,7 @@ function animate() {
 	font-style: normal;
 }
 
-main {
-	border: 2px solid red
-}
-
-header {
+#local {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -86,16 +105,18 @@ header {
 	height: 10vh;
 	font-family: 'SpaceTron', sans-serif;
 }
+/* bite */
+.game {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
 .player,
 .score-header {
 	flex: 1;
 	text-align: center;
 	padding: 10px;
-}
-
-.troad {
-	border: 2px solid red
 }
 
 .commands {

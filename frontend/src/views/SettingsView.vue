@@ -1,20 +1,14 @@
 <template>
-	<section class="menu-buttons">
-		<GlowingButton
-			v-for="menu_button in menu_buttons"
-			:text="menu_button.text"
-			:dest="menu_button.dest"
-			/>
-	</section>
+	<ButtonCross :buttons="buttons"/>
 </template>
 
 <script setup>
-import GlowingButton from '@/components/GlowingButton.vue';
+import ButtonCross from '@/components/ButtonCross.vue';
 import utils from '@utils'
 
-utils.updatePageTitle('SETTINGS');
+utils.updatePageTitle('settings');
 
-const menu_buttons = [
+const buttons = [
 	{ text:"general", dest:"/settings/settings_general" },
 	{ text:"graphics", dest:"/settings/settings_graphics" },
 	{ text:"credits", dest:"/settings/credits" },
