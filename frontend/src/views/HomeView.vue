@@ -11,6 +11,7 @@ const buttons = [
 	{ text: 'leaderboard', dest: 'leaderboard' },
 	{ text: 'profile', dest: 'profile' },
 	{ text: 'settings', dest: 'settings' },
+	{ text: 'login', dest: 'login' }
 ];
 </script>
 

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import LoginView from '@/views/LoginView.vue'
 import UnknownView from '@/views/UnknownPageView.vue'
 
 const router = createRouter({
@@ -11,6 +12,14 @@ const router = createRouter({
 			component: HomeView,
 			meta: {
 				title: 'FT_TRANSCENDENCE'
+			}
+		},
+		{
+			path: '/login',
+			name: 'LoginView',
+			component: LoginView,
+			meta: {
+				title: 'Login'
 			}
 		},
 		// {
