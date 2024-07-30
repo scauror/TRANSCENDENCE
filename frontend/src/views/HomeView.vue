@@ -4,9 +4,6 @@
 
 <script setup>
 import ButtonList from '@components/ButtonList.vue'
-import utils from '@utils'
-
-utils.updatePageTitle('FT_TRANSCENDENCE');
 
 const buttons = [
 	{ text: 'play', dest: 'play' },

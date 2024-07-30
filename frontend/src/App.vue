@@ -1,8 +1,5 @@
 <template>
-	<head>
-		<title> {{ $store.getters.getPageTitle }} </title>
-	</head>
-	<body>
+	<div id="root">
 		<header>
 			<HeaderBar />
 		</header>
@@ -12,7 +9,7 @@
 		<footer>
 			<FooterBar />
 		</footer>
-	</body>
+	</div>
 </template>
 
 <script setup>
@@ -36,7 +33,7 @@ import HeaderBar from '@components/HeaderBar.vue';
 	align-items: center;
 }
 
-body {
+#root {
 	font-family: "SpaceTron", sans-serif;
 	font-size: 1em;
 	background-color: black;

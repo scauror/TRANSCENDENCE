@@ -1,6 +1,6 @@
 <template>
 	<nav class="footer">
-		<h1 class="title"> {{ $store.getters.getPageTitle }} </h1>
+		<h1 class="title"> FT_TRANSCENDENCE </h1>
 		<router-link to="/">
 			<TranscendenceLogo />
 		</router-link>

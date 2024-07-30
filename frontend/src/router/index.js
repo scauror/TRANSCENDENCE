@@ -8,7 +8,10 @@ const router = createRouter({
 		{
 			path: '/',
 			name: 'HomeView',
-			component: HomeView
+			component: HomeView,
+			meta: {
+				title: 'FT_TRANSCENDENCE'
+			}
 		},
 		// {
 		// 	path: '/play',
@@ -78,9 +81,18 @@ const router = createRouter({
 		{
 			path: '/:pathMatch(.*)',
 			name: 'UnknownView',
-			component: UnknownView
+			component: UnknownView,
+			meta: {
+				title: 'unknown page'
+			}
 		},
 	]
-})
+});
+
+router.beforeEach(
+	(to, from) => {
+		document.title = to.meta?.title ?? 'placeholder title';
+	}
+);
 
 export default router

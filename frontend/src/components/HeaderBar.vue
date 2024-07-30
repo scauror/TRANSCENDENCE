@@ -3,12 +3,34 @@
 		<router-link to="/">
 			<TranscendenceLogo />
 		</router-link>
-		<h1 class="title"> {{ $store.getters.getPageTitle }} </h1>
+		<h1 class="title"> {{ title }} </h1>
 	</nav>
 </template>
 
 <script setup>
 import TranscendenceLogo from '@components/TranscendenceLogo.vue';
+import { ref, onMounted, onUnmounted } from 'vue'
+
+let mutation_observer;
+const title = ref(0);
+
+function updateTitle() {
+	title.value = document.title
+}
+
+onMounted(() => {
+	mutation_observer = new MutationObserver(updateTitle);
+	mutation_observer.observe(
+		document.querySelector('title'),
+		{ subtree: true, characterData: true, childList: true }
+	)
+	updateTitle();
+});
+
+onUnmounted(() => {
+	mutation_observer.disconnect();
+	mutation_observer = undefined;
+});
 </script>
 
 <style scoped>
