@@ -35,8 +35,8 @@ services:
       - www:/var/www/transcendance
       - media_volume:/home/app/web/mediafiles
     ports:
-      - 80:80
-      - 443:443
+      - 1331:80
+      - 1332:443
     depends_on:
       - backend
       - frontend

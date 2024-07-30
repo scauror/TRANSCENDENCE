@@ -1,11 +1,14 @@
 from django.shortcuts import render
-from rest_framework import generics, permissions, viewsets
+from rest_framework import permissions, mixins, viewsets
 from .serializers import UserCredSerializer, UserSerializer
-from rest_framework.decorators import action
-from .models import User, UserProfile
+from .models import User
 from .permissions import IsOwnerOrReadOnly
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(mixins.CreateModelMixin,
+                   mixins.RetrieveModelMixin,
+                   mixins.UpdateModelMixin,
+                   mixins.ListModelMixin,
+                   viewsets.GenericViewSet):
     queryset = User.objects.all()
 
     def get_serializer_class(self):
