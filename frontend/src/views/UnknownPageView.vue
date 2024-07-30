@@ -1,6 +1,6 @@
 <template>
 	<div id="unknown_page">
-		<GlowingText class="entry" :text="'Page not found'"/>
+		<div class="entry">Page not found</div>
 		<br/>
 		<GlowingButton :text="'go back home'" :dest="'/'"/>
 	</div>
@@ -24,5 +24,6 @@ utils.updatePageTitle('UNKNOWN PAGE');
 
 .entry {
 	padding: 10vh;
+	color: var(--glow-color);
 }
 </style>
