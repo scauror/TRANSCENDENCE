@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useStore } from 'vuex'
+import store from '@store';
 import { makeApiQuery } from '@utils'
 
 /**
@@ -14,7 +14,6 @@ import { makeApiQuery } from '@utils'
  * ```
  */
 export function authentificate(username, password) {
-	const store = useStore();
 	let result = undefined;
 	axios
 		.post(store.state.endpoints.obtainJWT, {
