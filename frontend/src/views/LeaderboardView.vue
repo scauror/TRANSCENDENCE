@@ -32,7 +32,7 @@ const players = [
 
 <style scoped>
 .leaderboard {
-	margin: 1vh;
+	margin: 2vh 15vh 0vh 15vh;
 	text-align: center;
 	color: var(--glow-color);
 	font-family: "SpaceTron", sans-serif;
@@ -46,18 +46,18 @@ table {
 	overflow: hidden;
 	font-family: "SpaceTron", sans-serif;
 	-webkit-box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
-		0px 0px 0.5em 0px hsl(0, 100%, 59%);
+	0px 0px 0.5em 0px hsl(0, 100%, 59%);
 	-moz-box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
-		0px 0px 0.5em 0px hsl(0, 100%, 59%);
+	0px 0px 0.5em 0px hsl(0, 100%, 59%);
 	box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
-		0px 0px 0.5em 0px hsl(0, 100%, 59%);
+	0px 0px 0.5em 0px hsl(0, 100%, 59%);
 }
 
 
 th,
 td {
 	background-color: rgba(104, 0, 0, 0.274);
-	padding: 10px;
+	padding: 1vh;
 	-webkit-box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
 	0px 0px 0.5em 0px hsl(0, 100%, 59%);
 	-moz-box-shadow: inset 0px 0px 0.5em 0px hsl(0, 100%, 59%),
