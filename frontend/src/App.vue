@@ -25,7 +25,7 @@ import HeaderBar from '@components/HeaderBar.vue';
 
 @font-face {
 	font-family: 'SpaceTron';
-	src: url('./fonts/spacetron-51nwz.otf') format('opentype');
+	src: url('/fonts/spacetron-51nwz.otf') format('opentype');
 }
 
 #header {

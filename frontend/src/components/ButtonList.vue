@@ -1,7 +1,7 @@
 <template>
 	<div class="button_list">
 		<GlowingButton
-			v-if="buttons !== undefined && buttons !== []"
+			v-if="buttons !== undefined && buttons.length > 0"
 			v-for="button in buttons"
 			:text="button.text"
 			:dest="button.dest"
@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import GlowingButton from '@components/GlowingButton.vue';
+import GlowingButton from '@/components/GlowingButton.vue';
 
 const props = defineProps([ 'buttons' ]);
 </script>
