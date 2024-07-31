@@ -20,19 +20,15 @@ const type = props.glowing
 		0 0 0.45em var(--glow-color);
 	text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
 	animation: text-flicker 7s linear infinite;
-	color: var(--glow-color);
 }
 
 .faulty-text {
 	opacity: 0.5;
 	animation: faulty-flicker 7s linear infinite;
-	color: var(--glow-color);
 }
 
 @keyframes faulty-flicker {
-	0% {
-		opacity: 0.4;
-	}
+	0% {opacity: 0.4;}
 
 	2% {
 		opacity: 0.4;

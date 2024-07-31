@@ -45,31 +45,22 @@ const chunks = createTextChuks(props.text);
 	color: var(--glow-color);
 	cursor: pointer;
 	padding: 0.5em 2em;
-	/* Ajustez le padding selon vos besoins */
 	width: 25vw;
-	/* Définissez une largeur fixe */
 	height: 8vh;
-	/* Définissez une hauteur fixe */
 	border: 0.15em solid var(--glow-color);
 	border-radius: 0.45em;
 	background: none;
 	perspective: 2em;
 	text-decoration: none;
 	font-family: "SpaceTron", sans-serif;
-	/* Ajustez la taille de la police si nécessaire */
 	font-weight: 900;
 	letter-spacing: 0.2em;
 	--size-factor: (0.00188323 * 70vw);
 	font-size: calc(12 * var(--size-factor));
-	/* Ajustez l'espacement entre les lettres */
 	text-align: center;
-	/* Centre le texte à l'intérieur du bouton */
 	display: flex;
-	/* Utilise Flexbox pour centrer le contenu */
 	justify-content: center;
-	/* Centre horizontalement */
 	align-items: center;
-	/* Centre verticalement */
 	-webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
 		0px 0px 0.5em 0px var(--glow-color);
 	-moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
@@ -79,6 +70,7 @@ const chunks = createTextChuks(props.text);
 	animation: border-flicker 7s linear infinite;
 	text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
 }
+
 .glowing_button::after {
 	content: "";
 	position: absolute;
@@ -88,6 +80,7 @@ const chunks = createTextChuks(props.text);
 	bottom: 0;
 	opacity: 0;
 	z-index: -1;
+	color: rgba(0, 0, 0, 0.8);
 	background-color: var(--glow-color);
 	box-shadow: 0 0 2em 0.2em var(--glow-color);
 	transition: opacity 100ms linear;
@@ -100,10 +93,12 @@ const chunks = createTextChuks(props.text);
 }
 
 .glowing_button:hover .glowing-txt {
+	color: rgba(0, 0, 0, 0.8);
 	animation: none;
 }
 
 .glowing_button:hover .faulty-letter {
+	color: rgba(0, 0, 0, 0.8);
 	animation: none;
 	text-shadow: none;
 	opacity: 1;
