@@ -52,7 +52,7 @@ THIRD_PARTY_APPS = [
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 CORS_ALLOWED_ORIGINS = [
-    "https://localhost:8080",
+    "http://localhost:5173",
 ]
 
 MIDDLEWARE = [
@@ -88,7 +88,17 @@ WSGI_APPLICATION = "transcendance.wsgi.application"
 
 AUTH_USER_MODEL = "users.User"
 
+DEFAULT_RENDERER_CLASSES = (
+    'rest_framework.renderers.JSONRenderer',
+)
+
+if DEBUG:
+    DEFAULT_RENDERER_CLASSES = DEFAULT_RENDERER_CLASSES + (
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
+
 REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
