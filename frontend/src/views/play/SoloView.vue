@@ -9,7 +9,7 @@
 				score: {{ score1 }} - {{ score2 }}
 			</h1>
 			<h1 class="player">
-				player 2: {{ player2 }} <br/>
+				player 2: {{ player2 }} <br />
 			</h1>
 		</header>
 		<main>
@@ -38,31 +38,31 @@ const player2 = ref("pong bot");
 let renderer;
 let game;
 
-const game_config1 = {
-    camera: {
-        position: {
-            x: 60,
-            y: 5,
-            z: 0
-        },
-        lookat: {
-            x: 0,
-            y: -20,
-            z: 0
-        },
-    },
-    mappings: {
-        paddles: {
-            left: {
-                go_left: 'a',
-                go_right: 'd'
-            },
-            right: {
-                go_left: 'ArrowLeft',
-                go_right: 'ArrowRight'
-            }
-        }
-    }
+const game_config = {
+	camera: {
+		position: {
+			x: 60,
+			y: 5,
+			z: 0
+		},
+		lookat: {
+			x: 0,
+			y: -20,
+			z: 0
+		},
+	},
+	mappings: {
+		paddles: {
+			left: {
+				go_left: 'a',
+				go_right: 'd'
+			},
+			right: {
+				go_left: 'ArrowLeft',
+				go_right: 'ArrowRight'
+			}
+		}
+	}
 };
 
 onMounted(() => {
@@ -71,20 +71,19 @@ onMounted(() => {
 
 	canvasContainer.value.appendChild(renderer.domElement);
 
-	game = new Game(numeroShape, game_config1);
+	game = new Game(numeroShape, game_config);
 	game.countdown();
 	animate();
 });
 
 function animate() {
-	requestAnimationFrame(animate);
 	if (!game.isGamePaused()) {
 		game.update();
-		game.render(renderer);
-
 		score1.value = game.getScore1();
 		score2.value = game.getScore2();
 	}
+	game.render(renderer);
+	requestAnimationFrame(animate);
 }
 </script>
 

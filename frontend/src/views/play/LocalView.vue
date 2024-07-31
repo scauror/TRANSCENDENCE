@@ -35,7 +35,7 @@ const player2 = ref("milou");
 let renderer;
 let game;
 
-const game_config2 = {
+const game_config = {
 	camera: {
 		position: {
 			x: 0,
@@ -63,21 +63,20 @@ const game_config2 = {
 };
 
 function animate() {
-	requestAnimationFrame(animate);
 	if (!game.isGamePaused()) {
 		game.update();
-		game.render(renderer);
-
 		score1.value = game.getScore1();
 		score2.value = game.getScore2();
 	}
+	game.render(renderer);
+	requestAnimationFrame(animate);
 }
 
 onMounted(() => {
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(window.innerWidth * 0.9, window.innerHeight * 0.9);
 	canvasContainer.value.appendChild(renderer.domElement);
-	game = new Game(numeroShape, game_config2);
+	game = new Game(numeroShape, game_config);
 	game.countdown();
 	requestAnimationFrame(animate);
 });
