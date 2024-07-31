@@ -1,5 +1,5 @@
 <template>
-	<router-link v-bind:to="dest" class="glowing_button">
+	<router-link v-if="dest" v-bind:to="dest" class="glowing_button">
 		<GlowingText
 			v-for="chunk in chunks"
 			:glowing="chunk.glowing"
@@ -7,6 +7,14 @@
 			:class="chunk.index == 0 ? '' : 'padded_text'"
 			/>
 	</router-link>
+	<div v-else class="glowing_button">
+		<GlowingText
+			v-for="chunk in chunks"
+			:glowing="chunk.glowing"
+			:text="chunk.text"
+			:class="chunk.index == 0 ? '' : 'padded_text'"
+			/>
+	</div>
 </template>
 
 <script setup>
