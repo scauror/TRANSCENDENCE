@@ -52,7 +52,7 @@ THIRD_PARTY_APPS = [
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 CORS_ALLOWED_ORIGINS = [
-    "https://localhost:8080",
+    "http://localhost:5173",
 ]
 
 MIDDLEWARE = [

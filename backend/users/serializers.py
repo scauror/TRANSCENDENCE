@@ -19,8 +19,12 @@ class UserCredSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email', 'username']
+        fields = ['email', 'username', 'pk']
+        read_only_fields = ['pk']
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer(many=False)
+
     class Meta:
         model = UserProfile
+        fields = '__all__'

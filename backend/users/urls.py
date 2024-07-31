@@ -4,7 +4,8 @@ from .views import *
 
 router = SimpleRouter()
 router.register(r'users', UserViewSet)
+router.register(r'userprofiles', UserProfileRetrieveView)
 
 urlpatterns = [
-    #path('signup', UserCreateView.as_view()),
+    path('me', MyUserProfileView.as_view()),
 ] + router.urls
