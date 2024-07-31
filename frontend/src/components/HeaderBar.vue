@@ -84,11 +84,54 @@ onUnmounted(() => {
 	cursor: pointer;
 }
 
+
+.signIn::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	z-index: -1;
+	color: rgba(0, 0, 0, 0.8);
+	background-color: var(--glow-color);
+	box-shadow: 0 0 2em 0.2em var(--glow-color);
+	transition: opacity 100ms linear;
+}
+
+.signIn:hover {
+	color: rgba(0, 0, 0, 0.8);
+	text-shadow: none;
+	animation: none;
+}
+
+.signIn:hover .glowing-txt {
+	color: rgba(0, 0, 0, 0.8);
+	animation: none;
+}
+
+.signIn:hover .faulty-letter {
+	color: rgba(0, 0, 0, 0.8);
+	animation: none;
+	text-shadow: none;
+	opacity: 1;
+}
+
 .signIn {
 	flex: 1 0 40%;
 	text-align: center;
 	margin-right: 1em;
 	letter-spacing: 0.1em;
+}
+
+.signIn:hover:before {
+	filter: blur(1.5em);
+	opacity: 1;
+}
+
+.signIn:hover:after {
+	opacity: 1;
 }
 
 .title {
