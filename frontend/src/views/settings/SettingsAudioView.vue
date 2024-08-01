@@ -1,8 +1,7 @@
 <template>
 	<div class="audio-menu">
-		<audio ref="audio" src="@/musics/guapman.mp3" loop></audio>
 		<div class="music-options">
-			<GlowingButton :text="'Musique 1'" dest=""/>
+			<GlowingButton @click="playMusic('Kavinsky-Nightcall')" :text="'Night Call'" dest=""/>
 			<GlowingButton :text="'Musique 2'" dest=""/>
 		</div>
 		<div class="volume-button-knob" ref="volumeButtonKnob">
@@ -35,69 +34,94 @@
 				</defs>
 				<circle class="circle" cx="300" cy="300" r="200" />
 				<g id="gradate" class="gradate" ref="gradateGroup"></g>
-				<circle id="slider" class="slider" cx="300" cy="130" r="10" ref="slider" @input="updateVolume" />
+				<circle id="slider" class="slider" cx="300" cy="130" r="10" ref="slider" @mousedown="startDrag" />
 				<g class="slider-wrap">
 					<circle id="slider-shadow" class="slider" cx="300" cy="130" r="10" ref="sliderShadow" />
 				</g>
 			</svg>
 		</div>
-		<!-- <span class="volume-meter">{{ settings.volume * 100 }}%</span> -->
 		<div class="music-options">
 			<GlowingButton :text="'Musique 3'"/>
-			<GlowingButton :text="'Musique 4'"/>
+			<GlowingButton :text="'Louis tu vas gerer'"/>
 		</div>
+		<audio ref="audioElement" :src="audioSrc"></audio>
 	</div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import GlowingButton from '@/components/GlowingButton.vue';
+import utils from '@/utils';
 
-const audio = ref(null);
-
-const playAudio = () => {
-	if (audio.value) {
-		audio.value.play().catch(error => {
-			console.error("Playback failed: ", error);
-		});
-	}
-};
-
-const updateVolume = (event) => {
-	if (audio.value) {
-		audio.value.volume = event.target.value / 100; // Ensure value is between 0 and 1
-	}
-};
-
-const settings = ref({
-	sound: true,
-	volume: 0.5
-});
-
-onMounted(() => {
-	if (audio.value) {
-		settings.value.volume = audio.value.volume; // Sync initial volume with the audio element
-	}
-	// const audio = document.getElementById('background-music');
-	// if (audio) {
-	//   settings.value.volume = audio.volume; // Sync initial volume with the audio element
-	// }
-});
-
-const STEP = 32;
-const DEG_RANGE = 135;
-
+const audioSrc = ref('');
+const audioElement = ref(null);
+const volumeButtonKnob = ref(null);
 const gradateGroup = ref(null);
 const slider = ref(null);
 const sliderShadow = ref(null);
-const volumeButtonKnob = ref(null);
+
+const volume = ref(0); // Reactive property for volume
+
+const playMusic = (track) => {
+	audioSrc.value = utils.loadAsset(`music/${track}.mp3`);
+	if (audioElement.value) {
+		audioElement.value.load();
+		audioElement.value.addEventListener('canplaythrough', () => {
+			audioElement.value.play();
+		}, { once: true });
+	}
+};
+
+const startDrag = (e) => {
+	e.preventDefault();
+	volumeButtonKnob.value.classList.add("without-animate");
+	document.addEventListener("mousemove", handleDrag);
+	document.addEventListener("mouseup", stopDrag, { once: true });
+};
+
+const handleDrag = (e) => {
+	updateSlider(e.clientX, e.clientY);
+};
+
+const stopDrag = () => {
+	document.removeEventListener("mousemove", handleDrag);
+	volumeButtonKnob.value.classList.remove("without-animate");
+};
+
+const updateSlider = (clientX, clientY) => {
+	const rect = volumeButtonKnob.value.getBoundingClientRect();
+	const CX = rect.width / 2;
+	const CY = rect.height / 2;
+
+	const x = clientX - rect.left;
+	const y = clientY - rect.top;
+
+	const r = Math.atan2(y - CY, x - CX);
+	const deg = Math.round((r / Math.PI) * 180) + 90;
+
+	let value = deg <= 180 ? deg : deg - 360;
+	value = value <= DEG_RANGE * -1 ? DEG_RANGE * -1 : value;
+	value = value >= DEG_RANGE ? DEG_RANGE : value;
+
+	setValue(value);
+	updateVolume(value);
+};
+
+const updateVolume = (deg) => {
+	if (audioElement.value) {
+		const normalizedVolume = (deg + DEG_RANGE) / (2 * DEG_RANGE);
+		audioElement.value.volume = normalizedVolume;
+	}
+};
+
+const STEP = 32;
+const DEG_RANGE = 135;
 
 const gradateLineTemplate = (deg, hue) =>
 	`<line data-deg="${deg}" class="active" style="--deg: ${deg}deg; --h: ${hue}" x1="300" y1="30" x2="300" y2="70" />`;
 
 let gradateLines = '';
-const Q = DEG_RANGE / STEP;
-for (let i = DEG_RANGE * -1; i <= DEG_RANGE; i += Q) {
+for (let i = DEG_RANGE * -1; i <= DEG_RANGE; i += DEG_RANGE / STEP) {
 	gradateLines += gradateLineTemplate(i, i + DEG_RANGE * 2);
 }
 
@@ -151,8 +175,8 @@ function setValue(v) {
 }
 
 function createGradientLines() {
-	const numLines = 36; // Nombre de lignes
-	const radius = 220; // Rayon des lignes
+	const numLines = 36; // Number of lines
+	const radius = 220; // Radius of the lines
 	let lines = '';
 
 	for (let i = 0; i < numLines; i++) {
@@ -162,7 +186,7 @@ function createGradientLines() {
 		const x2 = 300 + (radius + 30) * Math.cos((angle * Math.PI) / 180);
 		const y2 = 300 + (radius + 30) * Math.sin((angle * Math.PI) / 180);
 
-		const hue = (i * (360 / numLines)) % 360; // Teinte basée sur l'index
+		const hue = (i * (360 / numLines)) % 360; // Hue based on index
 		const saturation = '100%';
 		const lightness = '50%';
 
@@ -188,6 +212,7 @@ function setByCoords(clientX, clientY) {
 	value = value >= DEG_RANGE ? DEG_RANGE : value;
 
 	setValue(value);
+	updateVolume(value);
 }
 
 function clickHandler(e) {
@@ -197,7 +222,6 @@ function clickHandler(e) {
 function touchHandler(e) {
 	setByCoords(e.touches[0].clientX, e.touches[0].clientY);
 }
-
 </script>
 
 <style scoped>
@@ -216,14 +240,6 @@ function touchHandler(e) {
 	flex-direction: column;
 	align-items: center;
 	gap: 150px;
-}
-
-.left-options {
-	margin-right: 20px;
-}
-
-.right-options {
-	margin-left: 20px;
 }
 
 .volume-button-knob {
@@ -276,7 +292,6 @@ function touchHandler(e) {
 	stroke: hsla(var(--h), var(--s), 55%, var(--a));
 	transform: rotate(var(--deg));
 	transform-origin: 300px 300px;
-	/* Ensure lines are centered around the middle of the SVG */
 
 	&:hover,
 	&.active {
@@ -299,5 +314,4 @@ function touchHandler(e) {
 		margin: 10px 0;
 	}
 }
-
 </style>
