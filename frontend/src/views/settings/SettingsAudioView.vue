@@ -1,8 +1,8 @@
 <template>
 	<div class="audio-menu">
 		<div class="music-options">
-			<GlowingButton @click="playMusic('Kavinsky-Nightcall')" :text="'Night Call'" dest=""/>
-			<GlowingButton :text="'Musique 2'" dest=""/>
+			<GlowingButton @click="playMusic('Kavinsky-Nightcall')" :text="'Night Call'"/>
+			<GlowingButton @click="playMusic('Hamakua-Kisses')" :text="'Hamakua Kisses'"/>
 		</div>
 		<div class="volume-button-knob" ref="volumeButtonKnob">
 			<svg viewBox="0 0 600 600">
@@ -41,8 +41,8 @@
 			</svg>
 		</div>
 		<div class="music-options">
-			<GlowingButton :text="'Musique 3'"/>
-			<GlowingButton :text="'Louis tu vas gerer'"/>
+			<GlowingButton @click="playMusic('Rider')" :text="'Rider'"/>
+			<GlowingButton :text="'Louis'"/>
 		</div>
 		<audio ref="audioElement" :src="audioSrc"></audio>
 	</div>
@@ -59,8 +59,6 @@ const volumeButtonKnob = ref(null);
 const gradateGroup = ref(null);
 const slider = ref(null);
 const sliderShadow = ref(null);
-
-const volume = ref(0); // Reactive property for volume
 
 const playMusic = (track) => {
 	audioSrc.value = utils.loadAsset(`music/${track}.mp3`);
@@ -230,8 +228,9 @@ function touchHandler(e) {
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	height: 100vh;
+	height: 60vh;
 	padding: 10px;
+	margin-top: 5vh;
 	box-sizing: border-box;
 }
 
@@ -246,8 +245,8 @@ function touchHandler(e) {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 600px;
-	height: 600px;
+	width: 55vh;
+	height: 55vh;
 }
 
 .volume-button-knob svg {
