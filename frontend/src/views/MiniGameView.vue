@@ -1,39 +1,48 @@
 <template>
-	<div id="game" ref="canvasContainer"></div>>
+	<div id="game" ref="canvasContainer"></div>
 </template>
 
 <script setup>
-
 import { ref, onMounted, onUnmounted } from 'vue';
 import * as THREE from 'three';
 import { Game } from '@scripts/minigame.js';
 
-
+const ZNEAR = 0.1;
+const ZFAR = 1000;
 const canvasContainer = ref(null);
 let game;
 let renderer;
-
-function animate() {
-	game.update();
-	game.render(renderer);
-	requestAnimationFrame(animate);
-}
+let camera;
 
 onMounted(() => {
+	const WIDTH = window.innerWidth;
+	const HEIGHT = window.innerHeight;
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(window.innerWidth, window.innerHeight);
+	camera = new THREE.OrthographicCamera(-WIDTH / 2, +WIDTH / 2, -HEIGHT / 2, +HEIGHT / 2, ZNEAR, ZFAR);
+	camera.position.set(0, 0, 1);
 	canvasContainer.value.appendChild(renderer.domElement);
-	game = new Game();
-	game.update();
+	game = new Game(renderer);  // Passez le renderer au constructeur du jeu
 	requestAnimationFrame(animate);
 });
 
 onUnmounted(() => {
 	if (renderer !== undefined)
 		renderer.dispose();
-})
+});
+
+function animate() {
+	game.update();
+	game.render(renderer, camera);
+	requestAnimationFrame(animate);
+}
 
 </script>
 
 <style scoped>
+#game {
+	width: 100%;
+	height: 100%;
+}
 </style>
+  
