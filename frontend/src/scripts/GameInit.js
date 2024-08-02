@@ -15,7 +15,7 @@ const ZNEAR = 0.1;
 const ZFAR = 1000;
 
 export class Game {
-	constructor(numeroShapeRef, config, renderer) {
+	constructor(showCounter, config, renderer) {
 		const ASPECT_RATIO = window.innerWidth / window.innerHeight;
 		this.config = config;
 		this.score1 = 0;
@@ -90,7 +90,7 @@ export class Game {
 		));
 
 		this.paused = false;
-		this.numeroShapeRef = numeroShapeRef;
+		this.showCounter = showCounter;
 
 		window.addEventListener('keydown', (event) => {
 			if (event.key !== ' ')
@@ -198,19 +198,7 @@ export class Game {
 
 	countdown() {
 		this.pauseGame();
-		if (!this.numeroShapeRef.value) {
-			this.resumeGame();
-			return;
-		}
-		this.numeroShapeRef.value.style.display = 'block';
-		this.numeroShapeRef.value.classList.add('score-animation');
-		setTimeout(
-			() => {
-				this.numeroShapeRef.value.style.display = 'none';
-				this.resumeGame();
-			},
-			3000
-		);
+		this.showCounter.value = true;
 	}
 
 	getScore1() {
