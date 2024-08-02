@@ -66,12 +66,12 @@ const game_config1 = {
 };
 
 onMounted(() => {
-	renderer = new THREE.WebGLRenderer();
+	renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setSize(window.innerWidth, window.innerHeight);
 
 	canvasContainer.value.appendChild(renderer.domElement);
 
-	game = new Game(numeroShape, game_config1);
+	game = new Game(numeroShape, game_config1, renderer);
 	game.countdown();
 	animate();
 });
@@ -80,7 +80,7 @@ function animate() {
 	requestAnimationFrame(animate);
 	if (!game.isGamePaused()) {
 		game.update();
-		game.render(renderer);
+		game.render();
 
 		score1.value = game.getScore1();
 		score2.value = game.getScore2();

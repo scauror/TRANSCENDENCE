@@ -66,7 +66,7 @@ function animate() {
 	requestAnimationFrame(animate);
 	if (!game.isGamePaused()) {
 		game.update();
-		game.render(renderer);
+		game.render();
 
 		score1.value = game.getScore1();
 		score2.value = game.getScore2();
@@ -74,10 +74,10 @@ function animate() {
 }
 
 onMounted(() => {
-	renderer = new THREE.WebGLRenderer();
+	renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setSize(window.innerWidth * 0.9, window.innerHeight * 0.9);
 	canvasContainer.value.appendChild(renderer.domElement);
-	game = new Game(numeroShape, game_config2);
+	game = new Game(numeroShape, game_config2, renderer);
 	game.countdown();
 	requestAnimationFrame(animate);
 });
