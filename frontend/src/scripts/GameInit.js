@@ -10,6 +10,7 @@ const FOV = 75;
 const ZNEAR = 0.1;
 const ZFAR = 1000;
 
+
 export class Game {
 	constructor(numeroShapeRef, config) {
 		const ASPECT_RATIO = window.innerWidth / window.innerHeight;
@@ -90,10 +91,7 @@ export class Game {
 		window.addEventListener('keydown', (event) => {
 			if (event.key !== ' ')
 				return ;
-			this.isGamePaused()
-				? this.resumeGame()
-				: this.pauseGame()
-				;
+			this.isGamePaused() ? this.resumeGame() : this.pauseGame();
 		});
 	}
 
