@@ -18,11 +18,11 @@ onMounted(() => {
 	const WIDTH = window.innerWidth;
 	const HEIGHT = window.innerHeight;
 	renderer = new THREE.WebGLRenderer();
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setSize(WIDTH, HEIGHT);
 	camera = new THREE.OrthographicCamera(-WIDTH / 2, +WIDTH / 2, -HEIGHT / 2, +HEIGHT / 2, ZNEAR, ZFAR);
-	camera.position.set(0, 0, 1);
 	canvasContainer.value.appendChild(renderer.domElement);
-	game = new Game(renderer);  // Passez le renderer au constructeur du jeu
+	game = new Game(renderer);
+	camera.position.set(400, 500, 1); //  a changer c'est moche
 	requestAnimationFrame(animate);
 });
 
