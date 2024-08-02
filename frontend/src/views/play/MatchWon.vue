@@ -1,50 +1,58 @@
 <template>
-	<h1>
-		waiting for a match<span class="dots"></span>
+	<h1>and the winner is<br><br>
+		<span class="dots"></span><br>
+		<span class="winner">{{ winner }}</span>
 	</h1>
-	<div id="waiting_match">
-		<GlowingButton :text="'cancel matchmaking'" :dest="'/'" />
-		<GlowingButton :text="'Match Found View'" :dest="'/play/match_found'" />
-		<GlowingButton :text="'Match Won View'" :dest="'/play/match_won'" />
+	<div id="won_match">
+		<GlowingButton :text="'main menu'" :dest="'/'" />
 	</div>
 </template>
 
 <script setup>
+import {ref} from 'vue';
 import GlowingButton from '@components/GlowingButton.vue';
+
+const winner = ref("souli");
+const loser = ref("dolphin");
 </script>
 
 <style scoped>
-#waiting_match {
+#won_match {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 50vh;
 }
 
 h1 {
 	color: var(--glow-color);
 	margin-top: 10vh;
 	text-align: center;
-	font-size: 6vh;
+	font-size: 7vh;
 	font-weight: bolder;
 	letter-spacing: 0.2em;
 	text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
 	position: relative;
 }
 
+.winner {
+	font-size: 10vh;
+	opacity: 0;
+	animation: fadeIn 6s forwards;
+}
+
 .dots {
 	display: inline-block;
 	margin-left: 0.5em;
 	letter-spacing: 0.5em;
-	width: 1em;
+	text-align: center;
 }
 
 .dots::after {
 	content: '';
-	animation: dots 3s steps(3, end) infinite;
+	animation: dots 3s steps(3, end);
+    animation-iteration-count: 1;
 	width: 100%;
-	text-align: center;
 }
 
 @keyframes dots {
@@ -59,6 +67,15 @@ h1 {
 	}
 	90%{
 		content: '';
+	}
+}
+
+@keyframes fadeIn {
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }
 </style>

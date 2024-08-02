@@ -20,6 +20,8 @@ import SettingsGeneralView from '@/views/settings/SettingsGeneralView.vue'
 import SettingsGraphicsView from '@/views/settings/SettingsGraphicsView.vue'
 import CreditsView from '@/views/settings/CreditsView.vue'
 /* ************************************************************************** */
+import MatchFound from '@/views/play/MatchFound.vue'
+import MatchWon from '@/views/play/MatchWon.vue'
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -150,6 +152,24 @@ const router = createRouter({
 			component: UnknownView,
 			meta: {
 				title: 'unknown page'
+			}
+		},
+		{
+			// juste pour les tests ca va changer -> component et non View
+			path: '/play/match_found',
+			name: 'MatchFound',
+			component : MatchFound,
+			meta: {
+				title: 'match found'
+			}
+		},
+		{
+			// juste pour les tests ca va changer -> component et non View
+			path: '/play/match_won',
+			name: 'MatchWon',
+			component : MatchWon,
+			meta: {
+				title: 'match won'
 			}
 		},
 	]
