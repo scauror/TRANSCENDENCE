@@ -2,14 +2,14 @@
 	<div id="local">
 		<header>
 			<h1 class="player">
-				player 1: {{ player1 }} <br>
+				player 1: {{ player1 }} <br />
 				<h3 class="commands">commands : '← + →'</h3>
 			</h1>
 			<h1 class="score-header">
 				score: {{ score1 }} - {{ score2 }}
 			</h1>
 			<h1 class="player">
-				player 2: {{ player2 }} <br/>
+				player 2: {{ player2 }} <br />
 			</h1>
 		</header>
 		<main>
@@ -39,30 +39,30 @@ let renderer;
 let game;
 
 const game_config1 = {
-    camera: {
-        position: {
-            x: 60,
-            y: 5,
-            z: 0
-        },
-        lookat: {
-            x: 0,
-            y: -20,
-            z: 0
-        },
-    },
-    mappings: {
-        paddles: {
-            left: {
-                go_left: 'a',
-                go_right: 'd'
-            },
-            right: {
-                go_left: 'ArrowLeft',
-                go_right: 'ArrowRight'
-            }
-        }
-    }
+	camera: {
+		position: {
+			x: 60,
+			y: 5,
+			z: 0
+		},
+		lookat: {
+			x: 0,
+			y: -20,
+			z: 0
+		},
+	},
+	mappings: {
+		paddles: {
+			left: {
+				go_left: 'a',
+				go_right: 'd'
+			},
+			right: {
+				go_left: 'ArrowLeft',
+				go_right: 'ArrowRight'
+			}
+		}
+	}
 };
 
 onMounted(() => {
