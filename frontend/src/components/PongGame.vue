@@ -51,13 +51,13 @@ let renderer;
 let game;
 
 function animate() {
-	requestAnimationFrame(animate);
 	if (!game.isGamePaused()) {
 		game.update();
-		game.render();
 		players.value[0].score = game.getScore1();
 		players.value[1].score = game.getScore2();
 	}
+	game.render();
+	requestAnimationFrame(animate);
 }
 
 onMounted(() => {
