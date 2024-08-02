@@ -25,6 +25,7 @@
 import { ref, onMounted } from 'vue';
 import * as THREE from 'three';
 import { Game } from '@scripts/GameInit';
+import { config } from '@assets/game_config/pong/solo'
 
 const canvasContainer = ref(null);
 const numeroShape = ref(null);
@@ -38,40 +39,11 @@ const player2 = ref("pong bot");
 let renderer;
 let game;
 
-const game_config1 = {
-    camera: {
-        position: {
-            x: 60,
-            y: 5,
-            z: 0
-        },
-        lookat: {
-            x: 0,
-            y: -20,
-            z: 0
-        },
-    },
-    mappings: {
-        paddles: {
-            left: {
-                go_left: 'a',
-                go_right: 'd'
-            },
-            right: {
-                go_left: 'ArrowLeft',
-                go_right: 'ArrowRight'
-            }
-        }
-    }
-};
-
 onMounted(() => {
 	renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setSize(window.innerWidth, window.innerHeight);
-
 	canvasContainer.value.appendChild(renderer.domElement);
-
-	game = new Game(numeroShape, game_config1, renderer);
+	game = new Game(numeroShape, config, renderer);
 	game.countdown();
 	animate();
 });

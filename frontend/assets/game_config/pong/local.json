@@ -1,0 +1,28 @@
+{
+	"config": {
+		"camera": {
+			"position": {
+				"x": 0,
+				"y": 25,
+				"z": 5
+			},
+			"lookat": {
+				"x": 0,
+				"y": -20,
+				"z": 0
+			}
+		},
+		"mappings": {
+			"paddles": {
+				"left": {
+					"go_left": "s",
+					"go_right": "w"
+				},
+				"right": {
+					"go_left": "ArrowDown",
+					"go_right": "ArrowUp"
+				}
+			}
+		}
+	}
+}

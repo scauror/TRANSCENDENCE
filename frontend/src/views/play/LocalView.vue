@@ -22,6 +22,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import * as THREE from 'three';
 import { Game } from '@scripts/GameInit.js';
+import { config } from '@assets/game_config/pong/local'
 
 const canvasContainer = ref(null);
 const numeroShape = ref(null);
@@ -35,39 +36,11 @@ const player2 = ref("milou");
 let renderer;
 let game;
 
-const game_config2 = {
-	camera: {
-		position: {
-			x: 0,
-			y: 25,
-			z: 5
-		},
-		lookat: {
-			x: 0,
-			y: -20,
-			z: 0
-		},
-	},
-	mappings: {
-		paddles: {
-			left: {
-				go_left: 's',
-				go_right: 'w'
-			},
-			right: {
-				go_left: 'ArrowDown',
-				go_right: 'ArrowUp'
-			}
-		}
-	}
-};
-
 function animate() {
 	requestAnimationFrame(animate);
 	if (!game.isGamePaused()) {
 		game.update();
 		game.render();
-
 		score1.value = game.getScore1();
 		score2.value = game.getScore2();
 	}
@@ -77,7 +50,7 @@ onMounted(() => {
 	renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setSize(window.innerWidth * 0.9, window.innerHeight * 0.9);
 	canvasContainer.value.appendChild(renderer.domElement);
-	game = new Game(numeroShape, game_config2, renderer);
+	game = new Game(numeroShape, config, renderer);
 	game.countdown();
 	requestAnimationFrame(animate);
 });
