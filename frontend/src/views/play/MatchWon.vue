@@ -38,7 +38,7 @@ h1 {
 .winner {
 	font-size: 10vh;
 	opacity: 0;
-	animation: fadeIn 6s forwards;
+	animation: fadeIn 4s forwards;
 }
 
 .dots {
@@ -50,7 +50,7 @@ h1 {
 
 .dots::after {
 	content: '';
-	animation: dots 3s steps(3, end);
+	animation: dots 2s steps(3, end);
     animation-iteration-count: 1;
 	width: 100%;
 }
