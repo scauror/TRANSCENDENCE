@@ -2,17 +2,13 @@
 	<div class="playboard-selector">
 		<h1>Select Playboard</h1>
 		<div class="playboard-options">
-			<div class="playboard-option" @click="selectPlayboard('playboard1')">
-				<img src="@assets/play_boards/playboard1.png" alt="Playboard 1" />
+			<div class="playboard-option" @click="selectPlayboard('map1')">
+				<img src="@assets/play_boards/map1.webp" alt="Map 1" />
 				<p>I</p>
 			</div>
 			<div class="playboard-option" @click="selectPlayboard('playboard2')">
 				<img src="@assets/play_boards/playboard2.png" alt="Playboard 2" />
 				<p>II</p>
-			</div>
-			<div class="playboard-option" @click="selectPlayboard('playboard3')">
-				<img src="@assets/play_boards/playboard3.jpeg" alt="playboard 3" />
-				<p>III</p>
 			</div>
 		</div>
 	</div>
@@ -31,18 +27,8 @@ const selectPlayboard = (theme) => {
 	height: 100vh;
 }
 
-.header,
-.footer {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.main {
-	flex: 1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+h1 {
+	letter-spacing: 0.5em;
 }
 
 .playboard-selector {
@@ -51,25 +37,24 @@ const selectPlayboard = (theme) => {
 	padding: 10px;
 	color: var(--glow-color);
 	border: 5px solid var(--glow-color);
-	margin: 30px;
+	margin: 3vw;
 	border-radius: 0.45em;
 	-webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-		0px 0px 0.5em 0px var(--glow-color);
+	0px 0px 0.5em 0px var(--glow-color);
 	-moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-		0px 0px 0.5em 0px var(--glow-color);
+	0px 0px 0.5em 0px var(--glow-color);
 	box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
-		0px 0px 0.5em 0px var(--glow-color);
+	0px 0px 0.5em 0px var(--glow-color);
 	-webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
-		0 0 0.45em var(--glow-color);
+	0 0 0.45em var(--glow-color);
 	-moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
-		0 0 0.45em var(--glow-color);
+	0 0 0.45em var(--glow-color);
 	text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
 }
 
 .playboard-options {
 	display: flex;
-	margin: 30px;
-	gap: 50px;
+	gap: 200px;
 	justify-content: center;
 }
 
@@ -87,13 +72,15 @@ const selectPlayboard = (theme) => {
 }
 
 .playboard-option img {
-	width: 350px;
-	/* Ajuste la taille selon tes besoins */
-	height: 240px;
-	/* Ajuste la taille selon tes besoins */
+	width: 25vw;
+	height: 25vh;
 }
 
 .title2 {
 	margin: 0;
+}
+
+p {
+	font-size: x-large;
 }
 </style>

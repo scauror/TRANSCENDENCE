@@ -141,7 +141,7 @@ const router = createRouter({
 			name: 'CreditsView',
 			component: CreditsView,
 			meta: {
-				title: 'credits'
+				title: 'credit$'
 			}
 		},
 		{

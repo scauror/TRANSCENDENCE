@@ -32,7 +32,7 @@ const players = [
 
 <style scoped>
 .leaderboard {
-	margin: 1vh;
+	margin: 2vh 7vh 2vh 7vh;
 	text-align: center;
 	color: var(--glow-color);
 	font-family: "SpaceTron", sans-serif;

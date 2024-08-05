@@ -1,5 +1,5 @@
 <template>
-	<img class="logo" src="@assets/logo.png" alt="Logo Pong Ft_Transcendence">
+	<img class="logo" src="@assets/tr0nscendence_logo.webp" alt="Logo Pong Ft_Transcendence">
 </template>
 
 <style scoped>
