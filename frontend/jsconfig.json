@@ -1,21 +1,27 @@
 {
 	"compilerOptions": {
 		"paths": {
-			"@/*": [
-				"./src/*"
+			"@assets/*": [
+				"./assets/*"
 			],
 			"@components/*": [
 				"./src/components/*"
 			],
+			"@router/*": [
+				"./src/router/*"
+			],
 			"@scripts/*": [
 				"./src/scripts/*"
 			],
-			"@assets/*": [
-				"./assets/*"
+			"@store": [
+				"./src/store/*"
 			],
 			"@utils/*": [
 				"./src/utils/*"
-			]
+			],
+			"@/*": [
+				"./src/*"
+			],
 		}
 	},
 	"exclude": [

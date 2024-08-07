@@ -1,8 +1,12 @@
+
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { KEYBOARD } from '@scripts/KeyboardManager.js';
-import utils from '@utils'
+import utils from '@utils';
 
 const VELOCITY = 0.4;
 const MAX_ANGLE = 45;
@@ -12,14 +16,14 @@ const ZFAR = 1000;
 
 
 export class Game {
-	constructor(numeroShapeRef, config) {
+	constructor(showCounter, config, renderer) {
 		const ASPECT_RATIO = window.innerWidth / window.innerHeight;
 		this.config = config;
 		this.score1 = 0;
 		this.score2 = 0;
 
 		this.scene = new THREE.Scene();
-		this.camera = new THREE.PerspectiveCamera(FOV, ASPECT_RATIO , ZNEAR, ZFAR);
+		this.camera = new THREE.PerspectiveCamera(FOV, ASPECT_RATIO, ZNEAR, ZFAR);
 		this.textureLoader = new THREE.TextureLoader();
 
 		this.sphTexture = this.textureLoader.load(utils.loadAsset('texture/cyberSphere.png'));
@@ -32,7 +36,7 @@ export class Game {
 		this.mapScene = new GLTFLoader();
 		this.mapScene.setDRACOLoader(dracoLoader);
 		this.mapScene.load(
-			utils.loadAsset('map_scene/tronStadium.glb'),
+			utils.loadAsset('map_scene/tronStadium1.glb'),
 			(gltf) => {
 				this.scene.add(gltf.scene);
 				gltf.scene.scale.set(20, 20, 20);
@@ -43,24 +47,25 @@ export class Game {
 			}
 		);
 
-		const geometry = new THREE.BoxGeometry(1.6, 1, 7); 
-		const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });//({ map: this.padTexture });
-		
-		this.cube1 = new THREE.Mesh(geometry, material);
-		this.cube2 = new THREE.Mesh(geometry, material);
-		
+		const geometry = new THREE.BoxGeometry(1.6, 1, 7);
+		const neonMaterial = new THREE.MeshStandardMaterial({
+			color: 0xff0000,
+			emissive: 0xff0000,
+			emissiveIntensity: 2,
+			metalness: 2,
+			roughness: 0.1
+		});
+
+		this.cube1 = new THREE.Mesh(geometry, neonMaterial);
+		this.cube2 = new THREE.Mesh(geometry, neonMaterial);
+
 		this.cube1.position.set(-35, -19, 0);
 		this.cube2.position.set(35, -19, 0);
 
 		this.ballSpeed = { x: 0.5, z: 0.5 };
 
 		const sphGeometry = new THREE.SphereGeometry(1, 30, 30);
-		const sphMaterial = new THREE.MeshPhongMaterial({
-			map: this.textureLoader.load(utils.loadAsset('texture/cyberSphere.png')),
-			shininess: 100,
-			specular: new THREE.Color(0xffffff),
-		});
-		this.sphere = new THREE.Mesh(sphGeometry, sphMaterial);
+		this.sphere = new THREE.Mesh(sphGeometry, neonMaterial);
 		this.sphere.position.set(0, -19, 0);
 
 		// Ajouter les lumieres
@@ -78,7 +83,7 @@ export class Game {
 			this.config.camera.position.x,
 			this.config.camera.position.y,
 			this.config.camera.position.z
-		); 
+		);
 		this.camera.lookAt(new THREE.Vector3(
 			this.config.camera.lookat.x,
 			this.config.camera.lookat.y,
@@ -86,13 +91,41 @@ export class Game {
 		));
 
 		this.paused = false;
-		this.numeroShapeRef = numeroShapeRef;
+		this.showCounter = showCounter;
 
 		window.addEventListener('keydown', (event) => {
 			if (event.key !== ' ')
 				return ;
-			this.isGamePaused() ? this.resumeGame() : this.pauseGame();
+			this.isGamePaused()
+				? this.resumeGame()
+				: this.pauseGame();
 		});
+
+		const backgroundTexture = this.textureLoader.load(utils.loadAsset('landscape/zizi.jpg'));
+		const backgroundMaterial = new THREE.MeshBasicMaterial({ 
+			map: backgroundTexture,
+			opacity: 0.3,
+			transparent: true, 
+		});
+		const backgroundGeometry = new THREE.PlaneGeometry(750, 333);
+		const backgroundMesh = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
+
+		backgroundMesh.position.x = -200;
+		backgroundMesh.rotation.y = Math.PI / 2;
+		this.scene.add(backgroundMesh);
+
+		// Post-processing for neon effect
+		this.composer = new EffectComposer(renderer);
+		const renderPass = new RenderPass(this.scene, this.camera);
+		this.composer.addPass(renderPass);
+
+		const bloomPass = new UnrealBloomPass(
+			new THREE.Vector2(window.innerWidth, window.innerHeight),
+			0.3,  // strength
+			0.5,  // radius
+			0.2  // threshold
+		);
+		this.composer.addPass(bloomPass);
 	}
 
 	moveLeftPaddle(offset) {
@@ -152,7 +185,7 @@ export class Game {
 		const XOFFSET = this._compute_x_offset(paddle);
 
 		if (XOFFSET < 0)
-			return ;
+			return;
 
 		this.ballSpeed.z = speedMagnitude * Math.sin(angle);
 		this.ballSpeed.x = speedMagnitude * Math.cos(angle);
@@ -168,19 +201,7 @@ export class Game {
 
 	countdown() {
 		this.pauseGame();
-		if (!this.numeroShapeRef.value) {
-			this.resumeGame();
-			return ;
-		}
-		this.numeroShapeRef.value.style.display = 'block';
-		this.numeroShapeRef.value.classList.add('score-animation');
-		setTimeout(
-			() => {
-				this.numeroShapeRef.value.style.display = 'none';
-				this.resumeGame();
-			},
-			3000
-		);
+		this.showCounter.value = true;
 	}
 
 	getScore1() {
@@ -212,8 +233,7 @@ export class Game {
 		this.handlePaddleCollision(this.cube2);
 
 		// Collision avec les murs
-		if (this.sphere.position.z <= -18
-			|| this.sphere.position.z >= 18) {
+		if (this.sphere.position.z <= -18 || this.sphere.position.z >= 18) {
 			this.ballSpeed.z = -this.ballSpeed.z;
 		}
 	
@@ -228,7 +248,7 @@ export class Game {
 		}
 	}
 
-	render(renderer) {
-		renderer.render(this.scene, this.camera);
+	render() {
+		this.composer.render();
 	}
 }
